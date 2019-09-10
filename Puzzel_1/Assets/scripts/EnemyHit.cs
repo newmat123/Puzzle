@@ -14,6 +14,8 @@ public class EnemyHit : MonoBehaviour
             if (transform.position.x < collision.transform.position.x + 0.2 && transform.position.x > collision.transform.position.x - 0.2)
             {
 
+                transform.position = new Vector3(collision.transform.position.x ,collision.transform.position.y + 2.1f, 0);
+
                 Destroy(gameObject);
 
             }
