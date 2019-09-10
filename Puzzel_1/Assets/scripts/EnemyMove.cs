@@ -18,12 +18,12 @@ public class EnemyMove : MonoBehaviour
     void Update()
     {
         
-        if(transform.position.y < -4)
+        if(transform.position.y < -6)
         {
 
             FindObjectOfType<HealtBar>().SetSize(.2f);
 
-            Destroy(this);
+            Destroy(gameObject);
 
         }
 
