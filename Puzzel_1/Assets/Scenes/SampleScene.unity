@@ -740,7 +740,7 @@ GameObject:
   - component: {fileID: 1484061236}
   - component: {fileID: 1484061237}
   m_Layer: 0
-  m_Name: HealtBar
+  m_Name: HealtBar1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
