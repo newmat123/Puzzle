@@ -11,7 +11,7 @@ public class EnemyMove : MonoBehaviour
 
         Rigidbody2D RB = GetComponent<Rigidbody2D>();
 
-        RB.velocity = new Vector2(0,-5);
+        RB.velocity = new Vector2(0,-2);
 
     }
 

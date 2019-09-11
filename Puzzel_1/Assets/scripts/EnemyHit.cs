@@ -5,6 +5,12 @@ using UnityEngine;
 public class EnemyHit : MonoBehaviour
 {
 
+    Rigidbody2D RB;
+
+    private void Start()
+    {
+        RB = GetComponent<Rigidbody2D>();
+    }
     private void OnCollisionEnter2D(Collision2D collision)
     {
 
@@ -23,7 +29,10 @@ public class EnemyHit : MonoBehaviour
             {
 
                 FindObjectOfType<HealtBar>().SetSize(.5f);
-                Destroy(gameObject);
+
+                RB.AddForce(-collision.transform.position * 100);
+
+                Destroy(GetComponent<Collider2D>());
 
             }
 

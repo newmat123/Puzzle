@@ -28,11 +28,7 @@ public class playerMovement : MonoBehaviour
 
             }
                 
-                 
         }
-
-
-        
 
     }
 }
