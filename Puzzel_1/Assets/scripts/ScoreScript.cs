@@ -7,47 +7,78 @@ public class ScoreScript : MonoBehaviour
 {
 
 
-    float recordTime;
-    float time;
+    float BestTime;
+    float timeCount = 0;
 
     public bool gameactive;
+
+    public Text TimerText;
     public Text record;
     public Text newrecord;
+
+    public GameObject GameHolder;
+    public GameObject MenuHolder;
+    public GameObject GameUI;
 
     void Start()
     {
 
-        recordTime = PlayerPrefs.GetFloat("savedRecord");
+        GameHolder.SetActive(false);
+        GameUI.SetActive(false);
+        gameactive = false;
+        BestTime = PlayerPrefs.GetFloat("savedRecord");
 
     }
 
     void Update()
     {
 
-        while (gameactive == true)
+        if (gameactive == true)
         {
 
-            time += Time.deltaTime;
+            timeCount += Time.deltaTime;
+
+            TimerText.text = timeCount.ToString("F2");
 
         }
 
-        if(gameactive==false && time > 0f)
+        if(gameactive==false && timeCount > 0)
         {
 
-            if(time > recordTime)
+            if(timeCount > BestTime)
             {
 
-                recordTime = time;
+                BestTime = timeCount;
 
-                PlayerPrefs.SetFloat("savedRecord", time);
+                PlayerPrefs.SetFloat("savedRecord", timeCount);
 
-                newrecord.text = "New Record!!";
+                //newrecord.text = "New Record!!";
 
             }
 
-            record.text = time.ToString();
+            //record.text = timeCount.ToString();
 
         }
+
+    }
+
+    public void startGame()
+    {
+
+        GameHolder.SetActive(true);
+        GameUI.SetActive(true);
+        gameactive = true;
+        MenuHolder.SetActive(false);
+
+    }
+
+    public void endGame()
+    {
+
+        MenuHolder.SetActive(true);
+        GameHolder.SetActive(false);
+        GameUI.SetActive(false);
+        gameactive = false;
 
     }
 

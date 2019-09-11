@@ -21,7 +21,7 @@ public class playerMovement : MonoBehaviour
             {
 
                 touchPos.z = 0;
-                touchPos.y = -3;
+                touchPos.y = -1;
 
 
                 transform.position = touchPos;

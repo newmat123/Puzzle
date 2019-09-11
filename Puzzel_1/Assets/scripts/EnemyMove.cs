@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class EnemyMove : MonoBehaviour
 {
-    
+
+    Rigidbody2D RB;
 
     void Start()
     {
@@ -20,9 +21,7 @@ public class EnemyMove : MonoBehaviour
         
         if(transform.position.y < -6)
         {
-
-            FindObjectOfType<HealtBar>().SetSize(.2f);
-
+            
             Destroy(gameObject);
 
         }
