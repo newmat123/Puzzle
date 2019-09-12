@@ -22,8 +22,10 @@ public class HealtBar : MonoBehaviour
     private void Update()
     {
         
-        if(damege <= 0)
+        if(damege < 0.3)
         {
+            damege = 1;
+            SetSize(damege);
             FindObjectOfType<ScoreScript>().endGame();
         }
 
