@@ -19,7 +19,7 @@ public class EnemySpawnScript : MonoBehaviour
     {
 
         StartCoroutine(WaitSpawner());
-
+        //tror den her skal kaldes når spillets skal startes igen dab
     }
 
     void Update()

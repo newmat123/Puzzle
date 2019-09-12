@@ -70,6 +70,8 @@ public class ScoreScript : MonoBehaviour
         gameactive = true;
         MenuHolder.SetActive(false);
 
+        //start spawner her 
+
     }
 
     public void endGame()
