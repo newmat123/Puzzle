@@ -10,8 +10,10 @@ public class EnemySpawnScript : MonoBehaviour
     public Vector3 spawnValues;
     public float spawnWait;
     public int startWait;
+    public float A;
 
     private float timer;
+    private float timerB;
     int randEnemy;
 
     void Start()
@@ -24,14 +26,16 @@ public class EnemySpawnScript : MonoBehaviour
     {
 
         StartCoroutine(WaitSpawner());
+        timerB = 0;
+        spawnWait = 2;
 
     }
 
     void Update()
     {
 
-        //spawnWait = Random.Range(spawnL, spawnM);
-
+      
+        
     }
 
     IEnumerator WaitSpawner()
@@ -41,6 +45,7 @@ public class EnemySpawnScript : MonoBehaviour
         while (true)
         {
             timer += Time.deltaTime;
+            timerB += Time.deltaTime;
 
             if (timer >= spawnWait)
             {
@@ -51,8 +56,16 @@ public class EnemySpawnScript : MonoBehaviour
                 Instantiate(Enemys[randEnemy], spawnPoinrt + transform.TransformPoint(0, 0, 0), transform.rotation);
 
                 yield return new WaitForSeconds(spawnWait);
+
                 timer = 0;
-                spawnWait += Mathf.Sqrt(Time.deltaTime);
+
+                spawnWait = A / Mathf.Sqrt(timerB);
+                if(spawnWait > 2)
+                {
+
+                    spawnWait = 2;
+
+                }
 
             }
 
