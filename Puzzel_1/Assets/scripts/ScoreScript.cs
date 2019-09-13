@@ -15,6 +15,7 @@ public class ScoreScript : MonoBehaviour
     public Text TimerText;
     public Text record;
     public Text newrecord;
+    public Text oldRecord;
 
     public GameObject GameHolder;
     public GameObject MenuHolder;
@@ -26,7 +27,9 @@ public class ScoreScript : MonoBehaviour
         GameHolder.SetActive(false);
         GameUI.SetActive(false);
         gameactive = false;
+
         BestTime = PlayerPrefs.GetFloat("savedRecord");
+        oldRecord.text = BestTime.ToString("F2");
 
     }
 
@@ -52,6 +55,7 @@ public class ScoreScript : MonoBehaviour
 
                 PlayerPrefs.SetFloat("savedRecord", timeCount);
 
+                oldRecord.text = BestTime.ToString("F2");
                 //newrecord.text = "New Record!!";
 
             }
@@ -64,6 +68,8 @@ public class ScoreScript : MonoBehaviour
 
     public void startGame()
     {
+
+        timeCount = 0f;
 
         GameHolder.SetActive(true);
         GameUI.SetActive(true);
