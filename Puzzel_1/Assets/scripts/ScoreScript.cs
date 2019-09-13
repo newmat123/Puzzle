@@ -70,7 +70,7 @@ public class ScoreScript : MonoBehaviour
         gameactive = true;
         MenuHolder.SetActive(false);
 
-        //start spawner her 
+        FindObjectOfType<EnemySpawnScript>().startWaiter();
 
     }
 

@@ -17,7 +17,7 @@ public class EnemyHit : MonoBehaviour
     private void Update()
     {
         
-        if(ishit == false && transform.position.y < -5.5f)
+        if(ishit == false && transform.position.y < -5.5f && FindObjectOfType<ScoreScript>().gameactive == true)
         {
 
             FindObjectOfType<HealtBar>().doDamege();

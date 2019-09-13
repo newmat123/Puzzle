@@ -22,7 +22,7 @@ public class HealtBar : MonoBehaviour
     private void Update()
     {
         
-        if(damege < 0.3)
+        if(damege < 0.01)
         {
             damege = 1;
             SetSize(damege);
