@@ -1797,9 +1797,7 @@ MonoBehaviour:
   Enemys:
   - {fileID: 5729537571038841957, guid: 5e7d92c2795bf984b838e51541faad75, type: 3}
   spawnValues: {x: 2.2, y: 0, z: 0}
-  spawnWait: 0
-  spawnM: 2
-  spawnL: 0.5
+  spawnWait: 1
   startWait: 1
 --- !u!4 &1916043834
 Transform:

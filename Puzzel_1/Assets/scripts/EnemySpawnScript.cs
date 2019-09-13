@@ -9,17 +9,15 @@ public class EnemySpawnScript : MonoBehaviour
 
     public Vector3 spawnValues;
     public float spawnWait;
-    public float spawnM;
-    public float spawnL;
     public int startWait;
 
+    private float timer;
     int randEnemy;
 
     void Start()
     {
 
-        //StartCoroutine(WaitSpawner());
-        //tror den her skal kaldes når spillets skal startes igen dab
+
     }
 
     public void startWaiter()
@@ -32,7 +30,7 @@ public class EnemySpawnScript : MonoBehaviour
     void Update()
     {
 
-        spawnWait = Random.Range(spawnL, spawnM);
+        //spawnWait = Random.Range(spawnL, spawnM);
 
     }
 
@@ -42,14 +40,21 @@ public class EnemySpawnScript : MonoBehaviour
 
         while (true)
         {
+            timer += Time.deltaTime;
 
-            randEnemy = Random.Range(0, Enemys.Length);
+            if (timer >= spawnWait)
+            {
+                randEnemy = Random.Range(0, Enemys.Length);
 
-            Vector3 spawnPoinrt = new Vector3(Random.Range(-spawnValues.x, spawnValues.x), spawnValues.y, spawnValues.z);
+                Vector3 spawnPoinrt = new Vector3(Random.Range(-spawnValues.x, spawnValues.x), spawnValues.y, spawnValues.z);
 
-            Instantiate(Enemys[randEnemy], spawnPoinrt + transform.TransformPoint(0,0,0), transform.rotation);
+                Instantiate(Enemys[randEnemy], spawnPoinrt + transform.TransformPoint(0, 0, 0), transform.rotation);
 
-            yield return new WaitForSeconds(spawnWait);
+                yield return new WaitForSeconds(spawnWait);
+                timer = 0;
+                spawnWait += Mathf.Sqrt(Time.deltaTime);
+
+            }
 
         }
 
