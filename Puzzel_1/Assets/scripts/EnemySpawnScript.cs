@@ -47,6 +47,8 @@ public class EnemySpawnScript : MonoBehaviour
             timer += Time.deltaTime;
             timerB += Time.deltaTime;
 
+           
+
             if (timer >= spawnWait)
             {
                 randEnemy = Random.Range(0, Enemys.Length);
@@ -58,19 +60,26 @@ public class EnemySpawnScript : MonoBehaviour
                 yield return new WaitForSeconds(spawnWait);
 
                 timer = 0;
-
-                spawnWait = A / Mathf.Sqrt(timerB);
-                if(spawnWait > 2)
+                if (spawnWait > 0.15f)
                 {
 
-                    spawnWait = 2;
+                    spawnWait = A / Mathf.Sqrt(timerB);
+                    if (spawnWait > 2)
+                    {
 
+                        spawnWait = 2;
+
+                    }
+
+                }
+                else
+                {
+                    spawnWait = 0.15f;
                 }
 
             }
 
         }
-
 
     }
 

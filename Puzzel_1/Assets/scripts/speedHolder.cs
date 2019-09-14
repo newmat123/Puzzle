@@ -21,11 +21,19 @@ public class speedHolder : MonoBehaviour
         if(FindObjectOfType<ScoreScript>().gameactive == true)
         {
             timer += Time.deltaTime;
-
-            Speed =  Modifier * Mathf.Sqrt(timer);
-            if(Speed < 5)
+            if (Speed < 15)
             {
-                Speed = 1;
+
+                Speed = Modifier * Mathf.Sqrt(timer);
+                if (Speed < 2)
+                {
+                    Speed = 2;
+                }
+
+            }
+            else
+            {
+                Speed = 15;
             }
 
         }else if (FindObjectOfType<ScoreScript>().gameactive == false)

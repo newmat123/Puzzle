@@ -12,14 +12,16 @@ public class EnemyMove : MonoBehaviour
 
         Rigidbody2D RB = GetComponent<Rigidbody2D>();
 
-        RB.velocity = new Vector2(0,-2 * FindObjectOfType<speedHolder>().Speed);
+        RB.velocity = new Vector2(0, -FindObjectOfType<speedHolder>().Speed);
 
     }
 
     void Update()
     {
+
         
-        if(transform.position.y < -6)
+
+        if (transform.position.y < -6)
         {
             
             Destroy(gameObject);
