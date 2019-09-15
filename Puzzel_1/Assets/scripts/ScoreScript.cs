@@ -70,13 +70,13 @@ public class ScoreScript : MonoBehaviour
     {
 
         timeCount = 0f;
-        FindObjectOfType<speedHolder>().Reset();
 
         GameHolder.SetActive(true);
         GameUI.SetActive(true);
         gameactive = true;
         MenuHolder.SetActive(false);
 
+        FindObjectOfType<speedHolder>().Reset();
         FindObjectOfType<EnemySpawnScript>().startWaiter();
 
     }
