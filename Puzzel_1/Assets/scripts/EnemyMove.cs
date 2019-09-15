@@ -20,14 +20,6 @@ public class EnemyMove : MonoBehaviour
     {
 
         
-
-        if (transform.position.y < -6)
-        {
-            
-            Destroy(gameObject);
-
-        }
-
         if(FindObjectOfType<ScoreScript>().gameactive == false)
         {
 

@@ -21,6 +21,7 @@ public class EnemyHit : MonoBehaviour
         {
 
             FindObjectOfType<HealtBar>().doDamege();
+            Destroy(gameObject);
 
         }
 
