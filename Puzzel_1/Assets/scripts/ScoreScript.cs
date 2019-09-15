@@ -70,6 +70,7 @@ public class ScoreScript : MonoBehaviour
     {
 
         timeCount = 0f;
+        FindObjectOfType<speedHolder>().Reset();
 
         GameHolder.SetActive(true);
         GameUI.SetActive(true);

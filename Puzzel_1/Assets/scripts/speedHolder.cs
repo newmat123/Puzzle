@@ -15,35 +15,33 @@ public class speedHolder : MonoBehaviour
         
     }
 
+    public void Reset()
+    {
+
+        Speed = 0;
+        timer = 0;
+
+    }
+
 
     void Update()
     {
-        if(FindObjectOfType<ScoreScript>().gameactive == true)
-        {
-            timer += Time.deltaTime;
-            if (Speed < 15)
-            {
 
-                Speed = Modifier * Mathf.Sqrt(timer);
-                if (Speed < 2)
-                {
-                    Speed = 2;
-                }
-
-            }
-            else
-            {
-                Speed = 15;
-            }
-
-        }else if (FindObjectOfType<ScoreScript>().gameactive == false)
+        timer += Time.deltaTime;
+        if (Speed < 15)
         {
 
-            Speed = 0;
-            timer = 0;
+            Speed = Modifier * Mathf.Sqrt(timer);
+            if (Speed < 2)
+            {
+                Speed = 2;
+            }
 
         }
-        
-        
+        else
+        {
+            Speed = 15;
+        }
+
     }
 }
