@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class ScoreScript : MonoBehaviour
 {
 
-
+    string oldtext;
     float BestTime;
     float timeCount = 0;
 
@@ -21,6 +21,10 @@ public class ScoreScript : MonoBehaviour
     public GameObject GameUI;
     public GameObject DeathUI;
 
+    public GameObject inGameClock;
+    public GameObject inDeathClock;
+    public GameObject MainMenuClock;
+
     void Start()
     {
 
@@ -34,6 +38,8 @@ public class ScoreScript : MonoBehaviour
         
         oldRecord.text = BestTime.ToString("F2");
 
+        MainMenuClock.transform.position = new Vector3(MainMenuClock.transform.position.x - 28 * BestTime.ToString().Length, MainMenuClock.transform.position.y, MainMenuClock.transform.position.z);
+
     }
 
     void Update()
@@ -41,11 +47,19 @@ public class ScoreScript : MonoBehaviour
 
         if (gameactive == true)
         {
-
+            oldtext = timeCount.ToString("F2");
             timeCount += Time.deltaTime;
 
             TimerText.text = timeCount.ToString("F2");
 
+            if(TimerText.text.Length > oldtext.Length)
+            {
+
+                inGameClock.transform.position = new Vector3(inGameClock.transform.position.x - 28, inGameClock.transform.position.y, inGameClock.transform.position.z);
+                inDeathClock.transform.position = new Vector3(inDeathClock.transform.position.x - 28, inDeathClock.transform.position.y, inDeathClock.transform.position.z);
+
+            }
+           
         }
 
         if(gameactive==false && timeCount > 0)
@@ -59,7 +73,10 @@ public class ScoreScript : MonoBehaviour
                 PlayerPrefs.SetFloat("savedRecord", timeCount);
 
                 oldRecord.text = BestTime.ToString("F2");
+
                 newrecord.text = "New Record!!";
+
+                MainMenuClock.transform.position = new Vector3(MainMenuClock.transform.position.x - 28 * BestTime.ToString().Length, MainMenuClock.transform.position.y, MainMenuClock.transform.position.z);
 
             }
 
