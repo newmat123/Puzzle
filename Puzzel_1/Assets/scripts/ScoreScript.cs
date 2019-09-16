@@ -48,7 +48,7 @@ public class ScoreScript : MonoBehaviour
         else
         {
 
-            multiplayer = 1;
+            multiplayer = 3;
 
         }
         
