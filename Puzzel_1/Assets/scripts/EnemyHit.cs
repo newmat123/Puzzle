@@ -5,8 +5,11 @@ using UnityEngine;
 public class EnemyHit : MonoBehaviour
 {
 
+    float timeToDie = 0;
     bool ishit;
+    bool startTimer = false;
     Rigidbody2D RB;
+    Vector3 player;
 
     private void Start()
     {
@@ -25,7 +28,25 @@ public class EnemyHit : MonoBehaviour
 
         }
 
+        if(startTimer == true)
+        {
+
+            timeToDie += Time.deltaTime;
+            transform.position = new Vector3(player.x, player.y + 0.8f, 0);
+
+            if (timeToDie >= 0.15)
+            {
+                Destroy(gameObject);
+
+            }
+
+        }
+
     }
+
+
+    
+
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -35,12 +56,15 @@ public class EnemyHit : MonoBehaviour
         if (collision.gameObject.tag == "Player")
         {
 
+            player = collision.transform.position;
+
             if (transform.position.x < collision.transform.position.x + 0.2 && transform.position.x > collision.transform.position.x - 0.2)
             {
 
-                transform.position = new Vector3(collision.transform.position.x ,collision.transform.position.y + 2.1f, 0);
+                Destroy(GetComponent<Collider2D>());
+                FindObjectOfType<StressReceiver>().InduceStress(1);
 
-                Destroy(gameObject);
+                startTimer = true;
 
             }
             else
