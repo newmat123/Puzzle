@@ -8,6 +8,7 @@ public class ScoreScript : MonoBehaviour
     string oldtext;
     float BestTime;
     float timeCount = 0;
+    int multiplayer;
 
     public bool gameactive;
 
@@ -38,7 +39,20 @@ public class ScoreScript : MonoBehaviour
         
         oldRecord.text = BestTime.ToString("F2");
 
-        MainMenuClock.transform.position = new Vector3(MainMenuClock.transform.position.x - 28 * BestTime.ToString().Length, MainMenuClock.transform.position.y, MainMenuClock.transform.position.z);
+        if(BestTime.ToString().Length > 0)
+        {
+
+            multiplayer = BestTime.ToString().Length;
+
+        }
+        else
+        {
+
+            multiplayer = 1;
+
+        }
+        
+        MainMenuClock.transform.position = new Vector3(MainMenuClock.transform.position.x - 28 * multiplayer, MainMenuClock.transform.position.y, MainMenuClock.transform.position.z);
 
     }
 
@@ -75,8 +89,6 @@ public class ScoreScript : MonoBehaviour
                 oldRecord.text = BestTime.ToString("F2");
 
                 newrecord.text = "New Record!!";
-
-                MainMenuClock.transform.position = new Vector3(MainMenuClock.transform.position.x - 28 * BestTime.ToString().Length, MainMenuClock.transform.position.y, MainMenuClock.transform.position.z);
 
             }
 
