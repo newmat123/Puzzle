@@ -5,14 +5,16 @@ using UnityEngine;
 public class EnemyHit : MonoBehaviour
 {
 
+    Transform Player;
+
     float timeToDie = 0;
     bool ishit;
     bool startTimer = false;
     Rigidbody2D RB;
-    Vector3 player;
 
     private void Start()
     {
+
         ishit = false;
         RB = GetComponent<Rigidbody2D>();
     }
@@ -31,8 +33,12 @@ public class EnemyHit : MonoBehaviour
         if(startTimer == true)
         {
 
+            Player = GameObject.FindGameObjectWithTag("Player").transform;
+
+            transform.rotation = Player.rotation;
+
             timeToDie += Time.deltaTime;
-            transform.position = new Vector3(player.x, player.y + 0.8f, 0);
+            transform.position = new Vector3(Player.position.x, Player.position.y + 0.9f, 0);
 
             if (timeToDie >= 0.15)
             {
@@ -56,7 +62,6 @@ public class EnemyHit : MonoBehaviour
         if (collision.gameObject.tag == "Player")
         {
 
-            player = collision.transform.position;
 
             if (transform.position.x < collision.transform.position.x + 0.2 && transform.position.x > collision.transform.position.x - 0.2)
             {

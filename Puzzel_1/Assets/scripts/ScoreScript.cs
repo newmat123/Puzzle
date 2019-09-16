@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class ScoreScript : MonoBehaviour
 {
@@ -20,15 +21,19 @@ public class ScoreScript : MonoBehaviour
     public GameObject GameHolder;
     public GameObject MenuHolder;
     public GameObject GameUI;
+    public GameObject DeathUI;
 
     void Start()
     {
 
+        DeathUI.SetActive(false);
         GameHolder.SetActive(false);
         GameUI.SetActive(false);
+        MenuHolder.SetActive(true);
         gameactive = false;
 
         BestTime = PlayerPrefs.GetFloat("savedRecord");
+        
         oldRecord.text = BestTime.ToString("F2");
 
     }
@@ -56,11 +61,11 @@ public class ScoreScript : MonoBehaviour
                 PlayerPrefs.SetFloat("savedRecord", timeCount);
 
                 oldRecord.text = BestTime.ToString("F2");
-                //newrecord.text = "New Record!!";
+                newrecord.text = "New Record!!";
 
             }
 
-            //record.text = timeCount.ToString();
+            record.text = timeCount.ToString("F2");
 
         }
 
@@ -84,10 +89,18 @@ public class ScoreScript : MonoBehaviour
     public void endGame()
     {
 
-        MenuHolder.SetActive(true);
+        DeathUI.SetActive(true);
         GameHolder.SetActive(false);
         GameUI.SetActive(false);
         gameactive = false;
+
+    }
+
+    public void BackToStartMenu()
+    {
+
+        MenuHolder.SetActive(true);
+        DeathUI.SetActive(false);
 
     }
 
