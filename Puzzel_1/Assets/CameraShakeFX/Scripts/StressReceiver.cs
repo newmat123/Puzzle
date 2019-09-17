@@ -12,6 +12,7 @@ public class StressReceiver : MonoBehaviour
     [Tooltip("Maximum translation that the gameobject can receive when applying the shake effect.")]
     public Vector3 MaximumTranslationShake = Vector3.one * .75f;
 
+
     private void Update()
     {
         float shake = Mathf.Pow(_trauma, TraumaExponent);
@@ -36,6 +37,8 @@ public class StressReceiver : MonoBehaviour
             transform.localPosition += _lastPosition - previousPosition;
             transform.localRotation = Quaternion.Euler(transform.localRotation.eulerAngles + _lastRotation - previousRotation);
             _trauma = Mathf.Clamp01(_trauma - Time.deltaTime);
+
+
         }
         else
         {
@@ -45,6 +48,7 @@ public class StressReceiver : MonoBehaviour
             transform.localRotation = Quaternion.Euler(transform.localRotation.eulerAngles - _lastRotation);
             _lastPosition = Vector3.zero;
             _lastRotation = Vector3.zero;
+
         }
     }
 

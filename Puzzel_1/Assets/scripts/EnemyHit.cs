@@ -19,12 +19,13 @@ public class EnemyHit : MonoBehaviour
         RB = GetComponent<Rigidbody2D>();
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         
         if(ishit == false && transform.position.y < -5.5f && FindObjectOfType<ScoreScript>().gameactive == true)
         {
 
+            FindObjectOfType<StressReceiver>().InduceStress(1);
             FindObjectOfType<HealtBar>().doDamege();
             Destroy(gameObject);
 
@@ -67,7 +68,6 @@ public class EnemyHit : MonoBehaviour
             {
 
                 Destroy(GetComponent<Collider2D>());
-                FindObjectOfType<StressReceiver>().InduceStress(1);
 
                 startTimer = true;
 
@@ -76,9 +76,9 @@ public class EnemyHit : MonoBehaviour
             {
 
                 Destroy(GetComponent<Collider2D>());
-
+                FindObjectOfType<StressReceiver>().InduceStress(1);
                 RB.gravityScale = 1;
-                RB.AddForce(-collision.transform.position * 100);
+                RB.AddForce(-collision.transform.position * 130);
 
                 FindObjectOfType<HealtBar>().doDamege();
 
