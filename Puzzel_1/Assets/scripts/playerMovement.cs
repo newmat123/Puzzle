@@ -6,7 +6,7 @@ public class playerMovement : MonoBehaviour
 {
 
 
-    void Update()
+    void FixedUpdate()
     {
 
 

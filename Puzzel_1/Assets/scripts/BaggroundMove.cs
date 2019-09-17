@@ -17,7 +17,7 @@ public class BaggroundMove : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
 
         if(FindObjectOfType<ScoreScript>().gameactive == true)
@@ -28,7 +28,7 @@ public class BaggroundMove : MonoBehaviour
 
             offset = new Vector2(0, y);
 
-            florr.mainTextureOffset += offset * (Time.deltaTime/6);
+            florr.mainTextureOffset += offset * (Time.deltaTime/10);
 
         }
 

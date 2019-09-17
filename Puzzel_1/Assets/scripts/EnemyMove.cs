@@ -16,7 +16,7 @@ public class EnemyMove : MonoBehaviour
 
     }
 
-    void Update()
+    void FixedUpdate()
     {
 
         
