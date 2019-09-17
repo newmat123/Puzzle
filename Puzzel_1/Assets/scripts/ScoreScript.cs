@@ -2,18 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 public class ScoreScript : MonoBehaviour
 {
+
+    int PuzzelPices = 0;
 
     float BestTime;
     float timeCount = 0;
 
     public bool gameactive;
 
-    public Text TimerText;
-    public Text record;
-    public Text newrecord;
-    public Text oldRecord;
+    public TextMeshProUGUI TimerText;
+    public TextMeshProUGUI record;
+    public TextMeshProUGUI newrecord;
+    public TextMeshProUGUI oldRecord;
 
     public GameObject GameHolder;
     public GameObject MenuHolder;
@@ -68,6 +71,13 @@ public class ScoreScript : MonoBehaviour
             record.text = timeCount.ToString("F2");
 
         }
+
+    }
+
+    public void PlusOne()
+    {
+
+        PuzzelPices += 1;
 
     }
 

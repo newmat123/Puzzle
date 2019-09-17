@@ -24,7 +24,8 @@ public class speedHolder : MonoBehaviour
     {
 
         timer += Time.deltaTime;
-        if (Speed < 15)
+        
+        if (Speed < 20)
         {
 
             Speed = Modifier * Mathf.Sqrt(timer);
@@ -37,8 +38,8 @@ public class speedHolder : MonoBehaviour
         }
         else
         {
-            Speed = 15;
+            Speed = 20;
         }
-
+        
     }
 }

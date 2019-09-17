@@ -60,7 +60,8 @@ public class EnemySpawnScript : MonoBehaviour
                 yield return new WaitForSeconds(spawnWait);
 
                 timer = 0;
-                if (spawnWait > 0.15f)
+                
+                if (spawnWait > 0.10f)
                 {
 
                     spawnWait = A / Mathf.Sqrt(timerB);
@@ -74,9 +75,9 @@ public class EnemySpawnScript : MonoBehaviour
                 }
                 else
                 {
-                    spawnWait = 0.15f;
+                    spawnWait = 0.10f;
                 }
-
+                
             }
 
         }

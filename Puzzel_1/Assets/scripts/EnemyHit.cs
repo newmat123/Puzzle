@@ -69,6 +69,8 @@ public class EnemyHit : MonoBehaviour
 
                 Destroy(GetComponent<Collider2D>());
 
+                GetComponent<Rigidbody2D>().velocity = new Vector3(0, 0, 0);
+
                 startTimer = true;
 
             }
