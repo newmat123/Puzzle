@@ -10,11 +10,6 @@ public class speedHolder : MonoBehaviour
 
     private float timer;
 
-    void Start()
-    {
-        
-    }
-
     public void Reset()
     {
 
