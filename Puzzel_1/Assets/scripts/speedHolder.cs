@@ -5,6 +5,7 @@ using UnityEngine;
 public class speedHolder : MonoBehaviour
 {
 
+    public float florrSpeed;
     public float Speed;
     public float Modifier;
 
@@ -27,6 +28,7 @@ public class speedHolder : MonoBehaviour
         {
 
             Speed = Modifier * Mathf.Sqrt(timer);
+            florrSpeed = Speed;
             if (Speed < 2)
             {
                 Speed = 2;

@@ -20,11 +20,19 @@ public class BaggroundMove : MonoBehaviour
     void Update()
     {
 
-        y = FindObjectOfType<speedHolder>().Speed;
+        if(FindObjectOfType<ScoreScript>().gameactive == true)
+        {
 
-        offset = new Vector2(0, y);
+            y = FindObjectOfType<speedHolder>().florrSpeed;
 
-        florr.mainTextureOffset = offset;
+
+            offset = new Vector2(0, y);
+
+            florr.mainTextureOffset += offset * (Time.deltaTime/6);
+
+        }
+
+        
 
     }
 }
