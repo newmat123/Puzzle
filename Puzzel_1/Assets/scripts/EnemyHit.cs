@@ -12,10 +12,10 @@ public class EnemyHit : MonoBehaviour
     bool startTimer = false;
     Rigidbody2D RB;
 
+    public Animator animator;
 
     private void Start()
     {
-
         ishit = false;
         RB = GetComponent<Rigidbody2D>();
     }
@@ -75,6 +75,8 @@ public class EnemyHit : MonoBehaviour
                 GetComponent<Rigidbody2D>().velocity = new Vector3(0, 0, 0);
 
                 FindObjectOfType<ScoreScript>().PlusOne();
+
+                animator.SetBool("isHit", true);
 
                 startTimer = true;
 
