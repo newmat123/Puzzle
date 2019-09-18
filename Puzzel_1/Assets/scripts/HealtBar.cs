@@ -13,7 +13,7 @@ public class HealtBar : MonoBehaviour
     private void Start()
     {
 
-        amountOfDamege = 0.2f;
+        amountOfDamege = 0.33f;
         damege = 1;
         bar = transform.Find("bar");
 
