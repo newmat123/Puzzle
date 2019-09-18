@@ -7,7 +7,8 @@ public class ScoreScript : MonoBehaviour
 {
 
     int PuzzelPices = 0;
-    float money = 0;
+    int money = 0;
+    int totalMoney;
 
     int PriceNormal = 5;
 
@@ -49,10 +50,10 @@ public class ScoreScript : MonoBehaviour
         gameactive = false;
 
         BestTime = PlayerPrefs.GetFloat("savedRecord");
-        
+        totalMoney = PlayerPrefs.GetInt("myCash");
+
         oldRecord.text = BestTime.ToString("F2");
 
-        
     }
 
     void Update()
@@ -89,6 +90,8 @@ public class ScoreScript : MonoBehaviour
 
     }
 
+
+
     public void PlusOne()
     {
 
@@ -96,12 +99,27 @@ public class ScoreScript : MonoBehaviour
 
     }
 
+
+
+
+    public void GemCash(int cash)
+    {
+        PlayerPrefs.SetInt("myCash", cash);
+    }
+
+
+
+
     public void CalMoney()
     {
 
         money = (PuzzelPices * PriceNormal);
+        totalMoney += money;
+        GemCash(totalMoney);
 
     }
+
+
 
     public void startGame()
     {
@@ -118,6 +136,9 @@ public class ScoreScript : MonoBehaviour
 
     }
 
+
+
+
     public void endGame()
     {
 
@@ -132,6 +153,10 @@ public class ScoreScript : MonoBehaviour
         gameactive = false;
 
     }
+
+
+
+
 
     public void BackToStartMenu()
     {

@@ -42,7 +42,7 @@ public class EnemyHit : MonoBehaviour
             timeToDie += Time.deltaTime;
             transform.position = new Vector3(Player.position.x, Player.position.y + 0.91f, 0);
 
-            if (timeToDie >= FindObjectOfType<EnemySpawnScript>().spawnWait/10)
+            if (timeToDie >= 0.1)
             {
 
                 Destroy(gameObject);
