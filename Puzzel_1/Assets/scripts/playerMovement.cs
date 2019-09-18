@@ -5,7 +5,6 @@ using UnityEngine;
 public class playerMovement : MonoBehaviour
 {
 
-
     void FixedUpdate()
     {
 
@@ -31,4 +30,7 @@ public class playerMovement : MonoBehaviour
         }
 
     }
+
+   
+
 }

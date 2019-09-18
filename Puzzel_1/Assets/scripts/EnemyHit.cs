@@ -12,6 +12,7 @@ public class EnemyHit : MonoBehaviour
     bool startTimer = false;
     Rigidbody2D RB;
 
+
     private void Start()
     {
 
