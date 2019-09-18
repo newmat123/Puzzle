@@ -7,6 +7,9 @@ public class ScoreScript : MonoBehaviour
 {
 
     int PuzzelPices = 0;
+    float money = 0;
+
+    int PriceNormal = 5;
 
     float BestTime;
     float timeCount = 0;
@@ -25,6 +28,7 @@ public class ScoreScript : MonoBehaviour
     [Space(20)]
 
     public TextMeshProUGUI NormalPizzesText;
+    public TextMeshProUGUI TotalPriceText;
 
     [Space(20)]
 
@@ -92,6 +96,13 @@ public class ScoreScript : MonoBehaviour
 
     }
 
+    public void CalMoney()
+    {
+
+        money = (PuzzelPices * PriceNormal);
+
+    }
+
     public void startGame()
     {
 
@@ -110,7 +121,10 @@ public class ScoreScript : MonoBehaviour
     public void endGame()
     {
 
+        CalMoney();
+
         NormalPizzesText.text = PuzzelPices.ToString();
+        TotalPriceText.text = money.ToString();
 
         DeathUI.SetActive(true);
         GameHolder.SetActive(false);

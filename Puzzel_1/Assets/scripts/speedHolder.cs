@@ -40,6 +40,5 @@ public class speedHolder : MonoBehaviour
         {
             Speed = 20;
         }
-        
     }
 }

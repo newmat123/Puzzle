@@ -25,6 +25,7 @@ public class EnemyHit : MonoBehaviour
         if(ishit == false && transform.position.y < -5.5f && FindObjectOfType<ScoreScript>().gameactive == true)
         {
 
+
             FindObjectOfType<StressReceiver>().InduceStress(1);
             FindObjectOfType<HealtBar>().doDamege();
             Destroy(gameObject);
@@ -41,7 +42,7 @@ public class EnemyHit : MonoBehaviour
             timeToDie += Time.deltaTime;
             transform.position = new Vector3(Player.position.x, Player.position.y + 0.91f, 0);
 
-            if (timeToDie >= 0.15)
+            if (timeToDie >= FindObjectOfType<EnemySpawnScript>().spawnWait/10)
             {
 
                 Destroy(gameObject);

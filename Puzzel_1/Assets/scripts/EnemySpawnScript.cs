@@ -77,7 +77,6 @@ public class EnemySpawnScript : MonoBehaviour
                 {
                     spawnWait = 0.10f;
                 }
-                
             }
 
         }

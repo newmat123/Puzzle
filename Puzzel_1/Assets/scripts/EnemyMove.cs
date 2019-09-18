@@ -19,7 +19,6 @@ public class EnemyMove : MonoBehaviour
     void FixedUpdate()
     {
 
-        
         if(FindObjectOfType<ScoreScript>().gameactive == false)
         {
 
