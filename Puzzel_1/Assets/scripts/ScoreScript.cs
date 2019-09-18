@@ -11,17 +11,28 @@ public class ScoreScript : MonoBehaviour
     float BestTime;
     float timeCount = 0;
 
+    [Space(20)]
+
     public bool gameactive;
+
+    [Space(20)]
 
     public TextMeshProUGUI TimerText;
     public TextMeshProUGUI record;
     public TextMeshProUGUI newrecord;
     public TextMeshProUGUI oldRecord;
 
+    [Space(20)]
+
+    public TextMeshProUGUI NormalPizzesText;
+
+    [Space(20)]
+
     public GameObject GameHolder;
     public GameObject MenuHolder;
     public GameObject GameUI;
     public GameObject DeathUI;
+
 
 
     void Start()
@@ -99,6 +110,8 @@ public class ScoreScript : MonoBehaviour
     public void endGame()
     {
 
+        NormalPizzesText.text = PuzzelPices.ToString();
+
         DeathUI.SetActive(true);
         GameHolder.SetActive(false);
         GameUI.SetActive(false);
@@ -108,6 +121,8 @@ public class ScoreScript : MonoBehaviour
 
     public void BackToStartMenu()
     {
+
+        PuzzelPices = 0;
 
         MenuHolder.SetActive(true);
         DeathUI.SetActive(false);

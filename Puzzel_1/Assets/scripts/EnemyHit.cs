@@ -43,6 +43,7 @@ public class EnemyHit : MonoBehaviour
 
             if (timeToDie >= 0.15)
             {
+
                 Destroy(gameObject);
 
             }
@@ -70,6 +71,8 @@ public class EnemyHit : MonoBehaviour
                 Destroy(GetComponent<Collider2D>());
 
                 GetComponent<Rigidbody2D>().velocity = new Vector3(0, 0, 0);
+
+                FindObjectOfType<ScoreScript>().PlusOne();
 
                 startTimer = true;
 
