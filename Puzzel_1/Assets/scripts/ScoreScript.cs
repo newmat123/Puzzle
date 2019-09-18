@@ -162,6 +162,7 @@ public class ScoreScript : MonoBehaviour
     {
 
         PuzzelPices = 0;
+        newrecord.text = "";
 
         MenuHolder.SetActive(true);
         DeathUI.SetActive(false);

@@ -84,8 +84,8 @@ public class EnemyHit : MonoBehaviour
             else
             {
 
-                Destroy(GetComponent<Collider2D>());
                 FindObjectOfType<StressReceiver>().InduceStress(1);
+                Destroy(GetComponent<Collider2D>());
                 RB.gravityScale = 1;
                 RB.AddForce(-collision.transform.position * 130);
 
