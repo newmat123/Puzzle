@@ -46,6 +46,7 @@ public class EnemyHit : MonoBehaviour
             if (timeToDie >= 0.1)
             {
 
+                FindObjectOfType<playerMovement>().spawnPartikals();
                 Destroy(gameObject);
 
             }
