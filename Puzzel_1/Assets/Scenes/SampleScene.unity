@@ -1012,7 +1012,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &454472013
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1936,7 +1936,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &762299818
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4192,6 +4192,7 @@ MonoBehaviour:
   Enemys:
   - {fileID: 5729537571038841957, guid: 5e7d92c2795bf984b838e51541faad75, type: 3}
   - {fileID: 2823923666619174921, guid: 027666f3bc7df064b88c1985f539ba56, type: 3}
+  Arrow: {fileID: 8650108356167026888, guid: 6359ecb437dd6d84c9812b7d633cf23c, type: 3}
   spawnValues: {x: 2.2, y: 0, z: 0}
   spawnWait: 1
   SpecialSpawnWait: 0

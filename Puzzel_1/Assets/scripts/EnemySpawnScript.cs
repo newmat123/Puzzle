@@ -7,6 +7,13 @@ public class EnemySpawnScript : MonoBehaviour
 
     public GameObject[] Enemys;
 
+    [Space(20)]
+
+    public GameObject Arrow;
+    List<GameObject> ArrowToDelete = new List<GameObject>();
+
+    [Space(20)]
+
     public Vector3 spawnValues;
     public float spawnWait;
     public float SpecialSpawnWait;
@@ -18,10 +25,12 @@ public class EnemySpawnScript : MonoBehaviour
     private float timer;
     private float timerB;
 
+    private float ArrowTimer;
+
     public void startWaiter()
     {
 
-        SpecialSpawnWait = Random.Range(10, 15);
+        SpecialSpawnWait = Random.Range(5, 10);
         specialTimer = 0;
 
         StartCoroutine(WaitSpawner());
@@ -40,7 +49,7 @@ public class EnemySpawnScript : MonoBehaviour
 
             SpawnCharger();
             
-            SpecialSpawnWait = Random.Range(5, 30);
+            SpecialSpawnWait = Random.Range(15, 50);
 
             specialTimer = 0;
 
@@ -50,10 +59,25 @@ public class EnemySpawnScript : MonoBehaviour
 
     public void SpawnCharger()
     {
+        ArrowTimer = 0;
 
         Vector3 spawnPoinrt = new Vector3(Random.Range(-spawnValues.x, spawnValues.x), spawnValues.y, spawnValues.z);
+        Vector3 arrowpos = new Vector3(spawnPoinrt.x, 2, 0);
 
-        Instantiate(Enemys[1], spawnPoinrt + transform.TransformPoint(0, 0, 0), transform.rotation);
+        ArrowToDelete.Add(Instantiate(Arrow, arrowpos, Quaternion.Euler(new Vector3(0, 0, 90))));
+        
+        while(ArrowTimer < 3)
+        {
+
+            ArrowTimer += Time.deltaTime;
+            if (ArrowTimer >= 3)
+            {
+                Instantiate(Enemys[1], spawnPoinrt + transform.TransformPoint(0, 0, 0), transform.rotation);
+                Destroy(ArrowToDelete[0]);
+                ArrowToDelete = new List<GameObject>();
+            }
+                
+        }
 
     }
 
