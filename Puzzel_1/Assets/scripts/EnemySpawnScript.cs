@@ -18,12 +18,6 @@ public class EnemySpawnScript : MonoBehaviour
     private float timer;
     private float timerB;
 
-    void Start()
-    {
-
-
-    }
-
     public void startWaiter()
     {
 
@@ -38,6 +32,7 @@ public class EnemySpawnScript : MonoBehaviour
 
     void Update()
     {
+
         specialTimer += Time.deltaTime;
 
         if (specialTimer > SpecialSpawnWait)
@@ -45,7 +40,7 @@ public class EnemySpawnScript : MonoBehaviour
 
             SpawnCharger();
             
-            SpecialSpawnWait = Random.Range(5, 20);
+            SpecialSpawnWait = Random.Range(5, 30);
 
             specialTimer = 0;
 
@@ -59,7 +54,6 @@ public class EnemySpawnScript : MonoBehaviour
         Vector3 spawnPoinrt = new Vector3(Random.Range(-spawnValues.x, spawnValues.x), spawnValues.y, spawnValues.z);
 
         Instantiate(Enemys[1], spawnPoinrt + transform.TransformPoint(0, 0, 0), transform.rotation);
-
 
     }
 

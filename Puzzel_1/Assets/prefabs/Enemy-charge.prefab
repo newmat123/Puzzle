@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7544654779565514622}
   - component: {fileID: 2980068154597389445}
   - component: {fileID: 7544654777590090926}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Enemy-charge
   m_TagString: Enemy
   m_Icon: {fileID: 0}
