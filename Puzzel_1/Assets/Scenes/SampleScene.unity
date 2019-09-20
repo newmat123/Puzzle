@@ -4061,8 +4061,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Enemys:
   - {fileID: 5729537571038841957, guid: 5e7d92c2795bf984b838e51541faad75, type: 3}
+  - {fileID: 2823923666619174921, guid: 027666f3bc7df064b88c1985f539ba56, type: 3}
   spawnValues: {x: 2.2, y: 0, z: 0}
   spawnWait: 1
+  SpecialSpawnWait: 0
   startWait: 1
   A: 5
 --- !u!4 &1916043834
