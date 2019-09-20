@@ -37,12 +37,14 @@ public class ScoreScript : MonoBehaviour
     public GameObject MenuHolder;
     public GameObject GameUI;
     public GameObject DeathUI;
+    public GameObject CounterUI;
 
 
 
     void Start()
     {
 
+        CounterUI.SetActive(false);
         DeathUI.SetActive(false);
         GameHolder.SetActive(false);
         GameUI.SetActive(false);
@@ -124,18 +126,24 @@ public class ScoreScript : MonoBehaviour
     public void startGame()
     {
 
-        timeCount = 0f;
-
-        GameHolder.SetActive(true);
-        GameUI.SetActive(true);
-        gameactive = true;
+        CounterUI.SetActive(true);
         MenuHolder.SetActive(false);
-
-        FindObjectOfType<speedHolder>().Reset();
-        FindObjectOfType<EnemySpawnScript>().startWaiter();
 
     }
 
+    public void afterCount()
+    {
+
+        timeCount = 0f;
+
+        CounterUI.SetActive(false);
+        GameHolder.SetActive(true);
+        GameUI.SetActive(true);
+        gameactive = true;
+
+        FindObjectOfType<speedHolder>().Reset();
+        FindObjectOfType<EnemySpawnScript>().startWaiter();
+    }
 
 
 
