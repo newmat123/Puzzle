@@ -10,29 +10,34 @@ public class EnemySpawnScript : MonoBehaviour
     [Space(20)]
 
     public GameObject Arrow;
-    List<GameObject> ArrowToDelete = new List<GameObject>();
+    private bool spawned = false;
 
     [Space(20)]
 
     public Vector3 spawnValues;
     public float spawnWait;
     public float SpecialSpawnWait;
+    public float SpecialSpawnWaitStart;
 
     public int startWait;
     public float A;
 
-    private float specialTimer;
     private float timer;
     private float timerB;
 
     private float ArrowTimer;
 
+
+
+    Vector3 spawnPoinrt;
+    Vector3 arrowpos;
+
     public void startWaiter()
     {
 
-        SpecialSpawnWait = Random.Range(5, 10);
-        specialTimer = 0;
+        SpecialSpawnWaitStart = Random.Range(5, 10);
 
+        StartCoroutine(SpawnCharger());
         StartCoroutine(WaitSpawner());
         timerB = 0;
         spawnWait = 2;
@@ -42,44 +47,51 @@ public class EnemySpawnScript : MonoBehaviour
     void Update()
     {
 
-        specialTimer += Time.deltaTime;
-
-        if (specialTimer > SpecialSpawnWait)
-        {
-
-            SpawnCharger();
-            
-            SpecialSpawnWait = Random.Range(15, 50);
-
-            specialTimer = 0;
-
-        }
+ 
 
     }
 
-    public void SpawnCharger()
+    
+
+    IEnumerator SpawnCharger()
     {
-        ArrowTimer = 0;
 
-        Vector3 spawnPoinrt = new Vector3(Random.Range(-spawnValues.x, spawnValues.x), spawnValues.y, spawnValues.z);
-        Vector3 arrowpos = new Vector3(spawnPoinrt.x, 2, 0);
+        yield return new WaitForSeconds(SpecialSpawnWaitStart);
 
-        ArrowToDelete.Add(Instantiate(Arrow, arrowpos, Quaternion.Euler(new Vector3(0, 0, 90))));
-        
-        while(ArrowTimer < 3)
+        if(spawned == false)
+        {
+
+            spawnPoinrt = new Vector3(Random.Range(-spawnValues.x, spawnValues.x), spawnValues.y, spawnValues.z);
+            arrowpos = new Vector3(spawnPoinrt.x, 2, 0);
+
+            Instantiate(Arrow, arrowpos, Quaternion.Euler(new Vector3(0, 0, 90)));
+            ArrowTimer = 0;
+            spawned = true;
+
+        }
+
+        while(spawned == true)
         {
 
             ArrowTimer += Time.deltaTime;
+
             if (ArrowTimer >= 3)
             {
+
                 Instantiate(Enemys[1], spawnPoinrt + transform.TransformPoint(0, 0, 0), transform.rotation);
-                Destroy(ArrowToDelete[0]);
-                ArrowToDelete = new List<GameObject>();
-            }
                 
+                yield return new WaitForSeconds(SpecialSpawnWait);
+
+
+                SpecialSpawnWait = Random.Range(5, 10);
+                spawned = false;
+
+            }
+
         }
 
     }
+
 
     IEnumerator WaitSpawner()
     {
