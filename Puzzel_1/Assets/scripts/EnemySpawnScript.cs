@@ -17,7 +17,6 @@ public class EnemySpawnScript : MonoBehaviour
     public Vector3 spawnValues;
     public float spawnWait;
     public float SpecialSpawnWait;
-    public float SpecialSpawnWaitStart;
 
     public int startWait;
     public float A;
@@ -26,18 +25,18 @@ public class EnemySpawnScript : MonoBehaviour
     private float timerB;
 
     private float ArrowTimer;
+    private float timeTo;
 
-
-
-    Vector3 spawnPoinrt;
+    Vector3 spawnPoinrt2;
     Vector3 arrowpos;
+
+
 
     public void startWaiter()
     {
 
-        SpecialSpawnWaitStart = Random.Range(5, 10);
+        SpecialSpawnWait = Random.Range(5, 40);
 
-        StartCoroutine(SpawnCharger());
         StartCoroutine(WaitSpawner());
         timerB = 0;
         spawnWait = 2;
@@ -47,44 +46,34 @@ public class EnemySpawnScript : MonoBehaviour
     void Update()
     {
 
- 
-
-    }
-
-    
-
-    IEnumerator SpawnCharger()
-    {
-
-        yield return new WaitForSeconds(SpecialSpawnWaitStart);
-
-        if(spawned == false)
+        ArrowTimer += Time.deltaTime;
+        if(ArrowTimer > SpecialSpawnWait)
         {
 
-            spawnPoinrt = new Vector3(Random.Range(-spawnValues.x, spawnValues.x), spawnValues.y, spawnValues.z);
-            arrowpos = new Vector3(spawnPoinrt.x, 2, 0);
-
-            Instantiate(Arrow, arrowpos, Quaternion.Euler(new Vector3(0, 0, 90)));
-            ArrowTimer = 0;
-            spawned = true;
-
-        }
-
-        while(spawned == true)
-        {
-
-            ArrowTimer += Time.deltaTime;
-
-            if (ArrowTimer >= 3)
+            if(spawned == false)
             {
 
-                Instantiate(Enemys[1], spawnPoinrt + transform.TransformPoint(0, 0, 0), transform.rotation);
-                
-                yield return new WaitForSeconds(SpecialSpawnWait);
+                spawnPoinrt2 = new Vector3(Random.Range(-spawnValues.x, spawnValues.x), spawnValues.y, spawnValues.z);
+                arrowpos = new Vector3(spawnPoinrt2.x, 2, 0);
 
+                Instantiate(Arrow, arrowpos, Quaternion.Euler(new Vector3(0, 0, 90)));
+                timeTo = 0;
+                spawned = true;
 
-                SpecialSpawnWait = Random.Range(5, 10);
-                spawned = false;
+            }else if (spawned)
+            {
+
+                timeTo += Time.deltaTime;
+
+                if (timeTo >= 2)
+                {
+
+                    Instantiate(Enemys[1], spawnPoinrt2 + transform.TransformPoint(0, 0, 0), transform.rotation);
+                    spawned = false;
+                    SpecialSpawnWait = Random.Range(5, 40);
+                    ArrowTimer = 0;
+                    
+                }
 
             }
 
@@ -92,6 +81,7 @@ public class EnemySpawnScript : MonoBehaviour
 
     }
 
+    
 
     IEnumerator WaitSpawner()
     {

@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 7544654779565514622}
   - component: {fileID: 2980068154597389445}
   - component: {fileID: 7544654777590090926}
+  - component: {fileID: 7728046117153676078}
   m_Layer: 8
   m_Name: Enemy-charge
   m_TagString: Enemy
@@ -218,3 +219,15 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &7728046117153676078
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2823923666619174921}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3df8bff4aaa8364fad049c26fb9a7e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
