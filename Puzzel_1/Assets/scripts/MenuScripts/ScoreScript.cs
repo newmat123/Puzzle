@@ -11,10 +11,18 @@ public class ScoreScript : MonoBehaviour
     int money = 0;
     int totalMoney;
 
+
+
+
+    int PriceSpecial = 20;
     int PriceNormal = 5;
+
+
 
     float BestTime;
     float timeCount = 0;
+
+
 
     [Space(20)]
 
@@ -30,6 +38,7 @@ public class ScoreScript : MonoBehaviour
     [Space(20)]
 
     public TextMeshProUGUI NormalPizzesText;
+    public TextMeshProUGUI SpecialPizzesText;
     public TextMeshProUGUI TotalPriceText;
 
     [Space(20)]
@@ -119,7 +128,7 @@ public class ScoreScript : MonoBehaviour
     public void CalMoney()
     {
 
-        money = (PuzzelPices * PriceNormal);
+        money = (PuzzelPices * PriceNormal) + (SPuzzelPices * PriceSpecial);
         totalMoney += money;
         GemCash(totalMoney);
 
@@ -157,6 +166,7 @@ public class ScoreScript : MonoBehaviour
         CalMoney();
 
         NormalPizzesText.text = PuzzelPices.ToString();
+        SpecialPizzesText.text = SPuzzelPices.ToString();
         TotalPriceText.text = money.ToString();
 
         DeathUI.SetActive(true);
