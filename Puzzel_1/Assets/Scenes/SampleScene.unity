@@ -3259,6 +3259,7 @@ GameObject:
   - component: {fileID: 1427607969}
   - component: {fileID: 1427607971}
   - component: {fileID: 1427607972}
+  - component: {fileID: 1427607973}
   m_Layer: 9
   m_Name: Player
   m_TagString: Player
@@ -3434,6 +3435,20 @@ PolygonCollider2D:
       - {x: -0.57381713, y: -1.1596372}
       - {x: -0.6906342, y: -1.1117798}
       - {x: -0.75214076, y: -1.029078}
+--- !u!114 &1427607973
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1427607968}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89f754253a9be9b4c958419ee660a8c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slowDoenFactor: 0.05
+  slowdownLength: 2
 --- !u!1 &1440155931
 GameObject:
   m_ObjectHideFlags: 0
@@ -4509,6 +4524,7 @@ MonoBehaviour:
   Enemys:
   - {fileID: 5729537571038841957, guid: 5e7d92c2795bf984b838e51541faad75, type: 3}
   - {fileID: 2823923666619174921, guid: 027666f3bc7df064b88c1985f539ba56, type: 3}
+  - {fileID: 6442009728275661118, guid: d3b1af602d98f43469bc4d1bb9f49b68, type: 3}
   Arrow: {fileID: 8650108356167026888, guid: 6359ecb437dd6d84c9812b7d633cf23c, type: 3}
   spawnValues: {x: 2.2, y: 0, z: 0}
   spawnWait: 1

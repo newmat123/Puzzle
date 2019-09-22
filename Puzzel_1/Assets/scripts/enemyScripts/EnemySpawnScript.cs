@@ -80,7 +80,9 @@ public class EnemySpawnScript : MonoBehaviour
                 if (timeTo >= 2)
                 {
 
-                    Instantiate(Enemys[1], spawnPoinrt2 + transform.TransformPoint(0, 0, 0), transform.rotation);
+                    int i = Random.Range(1, Enemys.Length);
+
+                    Instantiate(Enemys[i], spawnPoinrt2 + transform.TransformPoint(0, 0, 0), transform.rotation);
                     spawned = false;
                     SpecialSpawnWait = Random.Range(Xmin, Xmax);
                     ArrowTimer = 0;

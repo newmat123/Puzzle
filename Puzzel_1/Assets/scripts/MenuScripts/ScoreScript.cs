@@ -183,6 +183,7 @@ public class ScoreScript : MonoBehaviour
     public void BackToStartMenu()
     {
 
+        SPuzzelPices = 0;
         PuzzelPices = 0;
         newrecord.text = "";
 

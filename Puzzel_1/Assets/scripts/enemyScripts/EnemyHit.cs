@@ -97,7 +97,14 @@ public class EnemyHit : MonoBehaviour
                     FindObjectOfType<HealtBar>().plusLife(3);
 
                 }
-                
+                else if (this.gameObject.tag == "Slow")
+                {
+
+                    FindObjectOfType<ScoreScript>().PlusOneSpecial();
+                    FindObjectOfType<slowMotion>().DoSlowmotion();
+
+                }
+
             }//ellers tager den et liv osv
             else
             {
