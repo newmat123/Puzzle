@@ -13,7 +13,7 @@ public class HealtBar : MonoBehaviour
     private void Start()
     {
 
-        amountOfDamege = 0.33f;
+        amountOfDamege = 0.25f;
         damege = 1;
         bar = transform.Find("bar");
 
@@ -22,7 +22,7 @@ public class HealtBar : MonoBehaviour
     private void Update()
     {
         
-        if(damege < 0.01)
+        if(damege <= 0)
         {
             damege = 1;
             SetSize(damege);
@@ -31,10 +31,24 @@ public class HealtBar : MonoBehaviour
 
     }
 
+
+    public void plusLife(int add)
+    {
+
+        damege += (amountOfDamege * add);
+        if(damege > 1)
+        {
+            damege = 1;
+        }
+
+        SetSize(damege);
+    }
+
+
     public void doDamege()
     {
 
-        damege = damege - amountOfDamege;
+        damege -= amountOfDamege;
 
         SetSize(damege);
 

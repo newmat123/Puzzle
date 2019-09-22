@@ -6,6 +6,7 @@ using TMPro;
 public class ScoreScript : MonoBehaviour
 {
 
+    int SPuzzelPices = 0;
     int PuzzelPices = 0;
     int money = 0;
     int totalMoney;
@@ -101,7 +102,10 @@ public class ScoreScript : MonoBehaviour
 
     }
 
-
+    public void PlusOneSpecial()
+    {
+        SPuzzelPices += 1;
+    }
 
 
     public void GemCash(int cash)

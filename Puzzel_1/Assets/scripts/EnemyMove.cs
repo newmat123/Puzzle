@@ -16,17 +16,4 @@ public class EnemyMove : MonoBehaviour
 
     }
 
-    void FixedUpdate()
-    {
-
-        if(FindObjectOfType<ScoreScript>().gameactive == false)
-        {
-
-            //partikals her og noget effekt 
-            Destroy(gameObject);
-
-        }
-
-    }
-
 }

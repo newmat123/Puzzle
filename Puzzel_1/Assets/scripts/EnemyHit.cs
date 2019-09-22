@@ -22,10 +22,18 @@ public class EnemyHit : MonoBehaviour
 
     private void FixedUpdate()
     {
-        
-        if(ishit == false && transform.position.y < -5.5f && FindObjectOfType<ScoreScript>().gameactive == true)
+
+        //søger for at de forsviner når man dør
+        if (FindObjectOfType<ScoreScript>().gameactive == false)
         {
 
+            Destroy(gameObject);
+
+        }
+
+        //søger for at man ikke mister liv på de brikker, som man allerede har mistet et liv på, når de falder ned.
+        if (ishit == false && transform.position.y < -5.5f && FindObjectOfType<ScoreScript>().gameactive == true)
+        {
 
             FindObjectOfType<StressReceiver>().InduceStress(1);
             FindObjectOfType<HealtBar>().doDamege();
@@ -33,6 +41,7 @@ public class EnemyHit : MonoBehaviour
 
         }
 
+        //søger for at de snapper og adder partikels efter 0,1 sec
         if(startTimer == true)
         {
 
@@ -67,21 +76,29 @@ public class EnemyHit : MonoBehaviour
         if (collision.gameObject.tag == "Player")
         {
 
-
+            //chekker om man har remt brikken korrekt og om der er en standart brik
             if (transform.position.x < collision.transform.position.x + 0.2 && transform.position.x > collision.transform.position.x - 0.2)
             {
 
                 Destroy(GetComponent<Collider2D>());
-
                 GetComponent<Rigidbody2D>().velocity = new Vector3(0, 0, 0);
-
-                FindObjectOfType<ScoreScript>().PlusOne();
-
                 animator.SetBool("isHit", true);
-
                 startTimer = true;
 
-            }
+                if(this.gameObject.tag == "Enemy")
+                {
+
+                    FindObjectOfType<ScoreScript>().PlusOne();
+
+                }else if(this.gameObject.tag == "Life")
+                {
+
+                    FindObjectOfType<ScoreScript>().PlusOneSpecial();
+                    FindObjectOfType<HealtBar>().plusLife(3);
+
+                }
+                
+            }//ellers tager den et liv osv
             else
             {
 
