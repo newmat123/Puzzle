@@ -21,21 +21,33 @@ public class EnemySpawnScript : MonoBehaviour
     public int startWait;
     public float A;
 
+
+    //----------------------------------------------------------------
+
+
+    private int Xmax = 40;
+    private int XmaxMin = 8;
+    private int Xmin = 10;
+    private int XminMin = 2;
+
+
     private float timer;
     private float timerB;
 
     private float ArrowTimer;
     private float timeTo;
 
-    Vector3 spawnPoinrt2;
-    Vector3 arrowpos;
+    private Vector3 spawnPoinrt2;
+    private Vector3 arrowpos;
 
-
+    //-------------------------------------------------------------
 
     public void startWaiter()
     {
+        Xmin = 10;
+        Xmax = 40;
 
-        SpecialSpawnWait = Random.Range(5, 40);
+        SpecialSpawnWait = Random.Range(10, 25);
 
         StartCoroutine(WaitSpawner());
         timerB = 0;
@@ -70,8 +82,29 @@ public class EnemySpawnScript : MonoBehaviour
 
                     Instantiate(Enemys[1], spawnPoinrt2 + transform.TransformPoint(0, 0, 0), transform.rotation);
                     spawned = false;
-                    SpecialSpawnWait = Random.Range(5, 40);
+                    SpecialSpawnWait = Random.Range(Xmin, Xmax);
                     ArrowTimer = 0;
+
+                    if(Xmax > XmaxMin)
+                    {
+
+                        Xmax -= 4;
+
+                    }
+                    else
+                    {
+                        Xmax = XmaxMin;
+                    }
+
+
+                    if(Xmin > XminMin)
+                    {
+                        Xmin -= 2;
+                    }
+                    else
+                    {
+                        Xmin = XminMin;
+                    }
                     
                 }
 
