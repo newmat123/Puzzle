@@ -11,8 +11,6 @@ public class playerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-
-
         if (Input.touchCount > 0)
         {
 
@@ -26,8 +24,8 @@ public class playerMovement : MonoBehaviour
                 touchPos.z = 0;
                 touchPos.y = -1;
 
-
-                transform.position = touchPos;
+                transform.position = Vector2.MoveTowards(transform.position, touchPos, 3f*Time.deltaTime);
+                //transform.position = touchPos;
 
             }
                 
