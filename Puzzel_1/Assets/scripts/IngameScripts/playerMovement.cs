@@ -24,8 +24,7 @@ public class playerMovement : MonoBehaviour
                 touchPos.z = 0;
                 touchPos.y = -1;
 
-                transform.position = Vector2.MoveTowards(transform.position, touchPos, 3f*Time.deltaTime);
-                //transform.position = touchPos;
+                transform.position = Vector2.MoveTowards(transform.position, touchPos, 20f*Time.deltaTime);
 
             }
                 

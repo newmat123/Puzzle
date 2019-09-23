@@ -5,7 +5,7 @@ using UnityEngine;
 public class slowMotion : MonoBehaviour
 {
 
-    public float slowDoenFactor = 1f;
+    public float slowDoenFactor = 10000f;
     public float slowdownLength = 2f;
 
     public void DoSlowmotion()

@@ -57,61 +57,72 @@ public class EnemySpawnScript : MonoBehaviour
 
     void Update()
     {
-
-        ArrowTimer += Time.deltaTime;
-        if(ArrowTimer > SpecialSpawnWait)
+        if (FindObjectOfType<ScoreScript>().gameactive == true)
         {
 
-            if(spawned == false)
+            ArrowTimer += Time.deltaTime;
+            if (ArrowTimer > SpecialSpawnWait)
             {
 
-                spawnPoinrt2 = new Vector3(Random.Range(-spawnValues.x, spawnValues.x), spawnValues.y, spawnValues.z);
-                arrowpos = new Vector3(spawnPoinrt2.x, 2, 0);
-
-                Instantiate(Arrow, arrowpos, Quaternion.Euler(new Vector3(0, 0, 90)));
-                timeTo = 0;
-                spawned = true;
-
-            }else if (spawned)
-            {
-
-                timeTo += Time.deltaTime;
-
-                if (timeTo >= 2)
+                if (spawned == false)
                 {
 
-                    int i = Random.Range(1, Enemys.Length);
+                    spawnPoinrt2 = new Vector3(Random.Range(-spawnValues.x, spawnValues.x), spawnValues.y, spawnValues.z);
+                    arrowpos = new Vector3(spawnPoinrt2.x, 2, 0);
 
-                    Instantiate(Enemys[i], spawnPoinrt2 + transform.TransformPoint(0, 0, 0), transform.rotation);
-                    spawned = false;
-                    SpecialSpawnWait = Random.Range(Xmin, Xmax);
-                    ArrowTimer = 0;
+                    Instantiate(Arrow, arrowpos, Quaternion.Euler(new Vector3(0, 0, 90)));
+                    timeTo = 0;
+                    spawned = true;
 
-                    if(Xmax > XmaxMin)
+                }
+                else if (spawned)
+                {
+
+                    timeTo += Time.deltaTime;
+
+                    if (timeTo >= 2)
                     {
 
-                        Xmax -= 4;
+                        int i = Random.Range(1, Enemys.Length);
+
+                        Instantiate(Enemys[i], spawnPoinrt2 + transform.TransformPoint(0, 0, 0), transform.rotation);
+                        spawned = false;
+                        SpecialSpawnWait = Random.Range(Xmin, Xmax);
+                        ArrowTimer = 0;
+
+                        if (Xmax > XmaxMin)
+                        {
+
+                            Xmax -= 4;
+
+                        }
+                        else
+                        {
+                            Xmax = XmaxMin;
+                        }
+
+
+                        if (Xmin > XminMin)
+                        {
+                            Xmin -= 2;
+                        }
+                        else
+                        {
+                            Xmin = XminMin;
+                        }
 
                     }
-                    else
-                    {
-                        Xmax = XmaxMin;
-                    }
 
-
-                    if(Xmin > XminMin)
-                    {
-                        Xmin -= 2;
-                    }
-                    else
-                    {
-                        Xmin = XminMin;
-                    }
-                    
                 }
 
             }
 
+        }
+        else
+        {
+            ArrowTimer = 0;
+            timeTo = 0;
+            spawned = false;
         }
 
     }
