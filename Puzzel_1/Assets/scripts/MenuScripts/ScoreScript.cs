@@ -144,6 +144,8 @@ public class ScoreScript : MonoBehaviour
         CounterUI.SetActive(true);
         MenuHolder.SetActive(false);
 
+        FindObjectOfType<SoundManeger>().unDampeSound();
+
     }
 
     public void afterCount()
@@ -175,6 +177,8 @@ public class ScoreScript : MonoBehaviour
         GameHolder.SetActive(false);
         GameUI.SetActive(false);
         gameactive = false;
+
+        FindObjectOfType<SoundManeger>().dampeSound();
 
     }
 

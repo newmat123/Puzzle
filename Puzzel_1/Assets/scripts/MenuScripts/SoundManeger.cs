@@ -34,6 +34,21 @@ public class SoundManeger : MonoBehaviour
 
     }
 
+    public void dampeSound()
+    {
+        
+        Musik.GetComponent<AudioLowPassFilter>().cutoffFrequency = (900);
+        
+        
+    }
+
+    public void unDampeSound()
+    {
+
+        Musik.GetComponent<AudioLowPassFilter>().cutoffFrequency = (22000);
+        
+    }
+
 
     public void MusikOnOff()
     {
