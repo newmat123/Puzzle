@@ -67,8 +67,8 @@ public class EnemySpawnScript : MonoBehaviour
                 if (spawned == false)
                 {
 
-                    spawnPoinrt2 = new Vector3(Random.Range(-spawnValues.x, spawnValues.x), spawnValues.y, spawnValues.z);
-                    arrowpos = new Vector3(spawnPoinrt2.x, 2, 0);
+                    spawnPoinrt2 = new Vector3(Random.Range(-spawnValues.x, spawnValues.x), spawnValues.y, spawnValues.z - 0.5f);
+                    arrowpos = new Vector3(spawnPoinrt2.x, 2, -1f);
 
                     Instantiate(Arrow, arrowpos, Quaternion.Euler(new Vector3(0, 0, 90)));
                     timeTo = 0;

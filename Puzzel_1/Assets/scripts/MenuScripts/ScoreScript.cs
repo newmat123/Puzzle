@@ -48,12 +48,14 @@ public class ScoreScript : MonoBehaviour
     public GameObject GameUI;
     public GameObject DeathUI;
     public GameObject CounterUI;
+    public GameObject SettingsMenu;
 
 
 
     void Start()
     {
 
+        SettingsMenu.SetActive(false);
         CounterUI.SetActive(false);
         DeathUI.SetActive(false);
         GameHolder.SetActive(false);
@@ -189,6 +191,15 @@ public class ScoreScript : MonoBehaviour
 
         MenuHolder.SetActive(true);
         DeathUI.SetActive(false);
+        SettingsMenu.SetActive(false);
+
+    }
+
+    public void settings()
+    {
+
+        SettingsMenu.SetActive(true);
+        MenuHolder.SetActive(false);
 
     }
 
