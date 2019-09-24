@@ -50,7 +50,7 @@ public class EnemyHit : MonoBehaviour
             transform.rotation = Player.rotation;
 
             timeToDie += Time.deltaTime;
-            transform.position = new Vector3(Player.position.x, Player.position.y + 0.91f, 0);
+            transform.position = Vector3.MoveTowards(transform.position, new Vector3(Player.position.x, Player.position.y + 0.91f, 0), 3f*Time.deltaTime);
 
             if (timeToDie >= 0.1)
             {

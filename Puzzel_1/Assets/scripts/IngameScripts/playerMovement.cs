@@ -16,12 +16,11 @@ public class playerMovement : MonoBehaviour
 
             Touch touch = Input.GetTouch(0);
 
-            Vector3 touchPos = Camera.main.ScreenToWorldPoint(touch.position);
+            Vector2 touchPos = Camera.main.ScreenToWorldPoint(touch.position);
 
             if(touchPos.x < 2.25 && touchPos.x > -2.3)
             {
 
-                touchPos.z = 0;
                 touchPos.y = -1;
 
                 transform.position = Vector2.MoveTowards(transform.position, touchPos, 30f*Time.deltaTime);
