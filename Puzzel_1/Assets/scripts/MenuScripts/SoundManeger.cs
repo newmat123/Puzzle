@@ -13,9 +13,14 @@ public class SoundManeger : MonoBehaviour
     public GameObject Musik;
 
 
+    private bool damp;
+    private bool unDamp;
+    private float val = 900;
 
     private void Start()
     {
+
+        val = 900;
 
         isMutet = intToBool(PlayerPrefs.GetInt("mute", 0));
 
@@ -34,17 +39,53 @@ public class SoundManeger : MonoBehaviour
 
     }
 
+    private void Update()
+    {
+
+        if (damp)
+        {
+
+            val -= 12000f * Time.deltaTime;
+            
+            if (val <= 900)
+            {
+                damp = false;
+                val = 900;
+            }
+
+            Musik.GetComponent<AudioLowPassFilter>().cutoffFrequency = (val);
+
+        }
+
+        if (unDamp)
+        {
+
+            val += 12000f * Time.deltaTime;
+            
+            if (val >= 22000)
+            {
+                unDamp = false;
+                val = 22000;
+            }
+
+            Musik.GetComponent<AudioLowPassFilter>().cutoffFrequency = (val);
+
+        }
+
+    }
+
+
     public void dampeSound()
     {
 
-        Musik.GetComponent<AudioLowPassFilter>().cutoffFrequency = (900);
+        damp = true;
         
     }
 
     public void unDampeSound()
     {
 
-        Musik.GetComponent<AudioLowPassFilter>().cutoffFrequency = (22000);
+        unDamp = true;
         
     }
 
