@@ -40,6 +40,7 @@ public class ScoreScript : MonoBehaviour
     public TextMeshProUGUI NormalPizzesText;
     public TextMeshProUGUI SpecialPizzesText;
     public TextMeshProUGUI TotalPriceText;
+    public TextMeshProUGUI shopCash;
 
     [Space(20)]
 
@@ -49,12 +50,14 @@ public class ScoreScript : MonoBehaviour
     public GameObject DeathUI;
     public GameObject CounterUI;
     public GameObject SettingsMenu;
+    public GameObject Shop;
 
 
 
     void Start()
     {
 
+        Shop.SetActive(false);
         SettingsMenu.SetActive(false);
         CounterUI.SetActive(false);
         DeathUI.SetActive(false);
@@ -64,7 +67,8 @@ public class ScoreScript : MonoBehaviour
         gameactive = false;
 
         BestTime = PlayerPrefs.GetFloat("savedRecord");
-        totalMoney = PlayerPrefs.GetInt("myCash");
+
+        updateText();
 
         oldRecord.text = BestTime.ToString("F2");
 
@@ -183,7 +187,11 @@ public class ScoreScript : MonoBehaviour
     }
 
 
-
+    public void updateText()
+    {
+        totalMoney = PlayerPrefs.GetInt("myCash");
+        shopCash.text = totalMoney.ToString();
+    }
 
 
     public void BackToStartMenu()
@@ -203,6 +211,14 @@ public class ScoreScript : MonoBehaviour
     {
 
         SettingsMenu.SetActive(true);
+        MenuHolder.SetActive(false);
+
+    }
+
+    public void ShopBottun()
+    {
+
+        Shop.SetActive(true);
         MenuHolder.SetActive(false);
 
     }
