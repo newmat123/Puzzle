@@ -36,9 +36,8 @@ public class SoundManeger : MonoBehaviour
 
     public void dampeSound()
     {
-        
+
         Musik.GetComponent<AudioLowPassFilter>().cutoffFrequency = (900);
-        
         
     }
 
