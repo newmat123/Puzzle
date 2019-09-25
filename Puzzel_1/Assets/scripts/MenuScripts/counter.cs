@@ -7,7 +7,7 @@ public class counter : MonoBehaviour
 
     public GameObject[] numbers;
     List<GameObject> numberToDelete = new List<GameObject>();
-    Vector3 pos = new Vector3(0,0,0);
+    Vector3 pos = new Vector3(540,960,0);
 
     float timer = 0;
     int timeTo = 0;
@@ -22,8 +22,9 @@ public class counter : MonoBehaviour
         {
             if(i < numbers.Length)
             {
-
-                numberToDelete.Add(Instantiate(numbers[i], pos, transform.rotation));
+                GameObject test = Instantiate(numbers[i], pos, transform.rotation);
+                test.transform.parent = gameObject.transform;
+                numberToDelete.Add(test);
 
                 timeTo += 1;
 
