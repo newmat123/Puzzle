@@ -45,7 +45,7 @@ public class SoundManeger : MonoBehaviour
         if (damp)
         {
 
-            val -= 12000f * Time.deltaTime;
+            val -= 10000f * Time.deltaTime;
             
             if (val <= 900)
             {
@@ -60,7 +60,7 @@ public class SoundManeger : MonoBehaviour
         if (unDamp)
         {
 
-            val += 12000f * Time.deltaTime;
+            val += 10000f * Time.deltaTime;
             
             if (val >= 22000)
             {
