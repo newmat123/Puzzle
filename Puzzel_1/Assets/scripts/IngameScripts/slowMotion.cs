@@ -6,7 +6,7 @@ public class slowMotion : MonoBehaviour
 {
 
     public GameObject[] holders;
-    public GameObject slBottun;
+    public GameObject[] slBottun;
 
     public float slowDoenFactor = 0.5f;
     public float slowdownLength = 5f;
@@ -48,6 +48,11 @@ public class slowMotion : MonoBehaviour
             }
         }
 
+        for(int i = 0; i < slBottun.Length; i++)
+        {
+            slBottun[i].SetActive(false);
+        }
+
     }
 
 
@@ -59,7 +64,7 @@ public class slowMotion : MonoBehaviour
 
             timeTo += Time.deltaTime;
 
-            if(timeTo > FindObjectOfType<Shop>().SlowmoTime) 
+            if(timeTo > FindObjectOfType<Shop>().SlowmoTime || FindObjectOfType<ScoreScript>().gameactive == false) 
             {
 
                 Time.timeScale += (1f / slowdownLength) * Time.deltaTime;
@@ -79,7 +84,40 @@ public class slowMotion : MonoBehaviour
 
     public void getSlowMo()
     {
-        slBottun.SetActive(true);
+        
+
+        if(slBottun[0].activeInHierarchy == true)
+        {
+
+            if(slBottun[1].activeInHierarchy == true)
+            {
+
+                if(slBottun[2].activeInHierarchy == false)
+                {
+                    if (holders[2].activeInHierarchy)
+                    {
+                        slBottun[2].SetActive(true);
+                    }
+                    
+                }
+
+            }
+            else
+            {
+
+                if (holders[1].activeInHierarchy)
+                {
+                    slBottun[1].SetActive(true);
+                }
+                
+            }
+            
+        }
+        else
+        {
+            slBottun[0].SetActive(true);
+        }
+
     }
 
     public void DoSlowmotion()
@@ -89,7 +127,27 @@ public class slowMotion : MonoBehaviour
             Time.timeScale = 0.5f;
             Time.fixedDeltaTime = Time.timeScale * 0.02f;
             slowMo = true;
-            slBottun.SetActive(false);
+
+            if (slBottun[2].activeInHierarchy == false)
+            {
+
+                if (slBottun[1].activeInHierarchy == false)
+                {
+
+                    slBottun[0].SetActive(false);
+
+                }
+                else
+                {
+                    slBottun[1].SetActive(false);
+                }
+
+            }
+            else
+            {
+                slBottun[2].SetActive(false);
+            }
+
         }
 
     }

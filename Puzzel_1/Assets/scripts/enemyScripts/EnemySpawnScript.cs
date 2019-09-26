@@ -44,7 +44,7 @@ public class EnemySpawnScript : MonoBehaviour
 
     public void startWaiter()
     {
-        Xmin = 10;
+        Xmin = 5;
         Xmax = 40;
 
         SpecialSpawnWait = Random.Range(10, 25);
@@ -53,87 +53,81 @@ public class EnemySpawnScript : MonoBehaviour
         timerB = 0;
         spawnWait = 2;
 
+        ArrowTimer = 0;
+        timeTo = 0;
+        spawned = false;
+
     }
 
     void Update()
     {
-        if (FindObjectOfType<ScoreScript>().gameactive == true)
+        
+        ArrowTimer += Time.deltaTime;
+        if (ArrowTimer > SpecialSpawnWait)
         {
 
-            ArrowTimer += Time.deltaTime;
-            if (ArrowTimer > SpecialSpawnWait)
+            if (spawned == false)
             {
 
-                if (spawned == false)
+                spawnPoinrt2 = new Vector3(Random.Range(-spawnValues.x, spawnValues.x), spawnValues.y, spawnValues.z - 0.5f);
+                arrowpos = new Vector3(spawnPoinrt2.x, 2, -1f);
+
+                Instantiate(Arrow, arrowpos, Quaternion.Euler(new Vector3(0, 0, 90)));
+                timeTo = 0;
+                spawned = true;
+
+            }
+            else if (spawned)
+            {
+
+                timeTo += Time.deltaTime;
+
+                if (timeTo >= 2)
                 {
 
-                    spawnPoinrt2 = new Vector3(Random.Range(-spawnValues.x, spawnValues.x), spawnValues.y, spawnValues.z - 0.5f);
-                    arrowpos = new Vector3(spawnPoinrt2.x, 2, -1f);
+                    int i;
 
-                    Instantiate(Arrow, arrowpos, Quaternion.Euler(new Vector3(0, 0, 90)));
-                    timeTo = 0;
-                    spawned = true;
-
-                }
-                else if (spawned)
-                {
-
-                    timeTo += Time.deltaTime;
-
-                    if (timeTo >= 2)
+                    if (FindObjectOfType<Shop>().isSlowmoActive == true)
                     {
-
-                        int i;
-
-                        if (FindObjectOfType<Shop>().isSlowmoActive == true)
-                        {
-                            i = Random.Range(1, Enemys.Length);
-                        }
-                        else
-                        {
-                            i = Random.Range(1, Enemys.Length-1);
-                        }
+                        i = Random.Range(1, Enemys.Length);
+                    }
+                    else
+                    {
+                        i = Random.Range(1, Enemys.Length-1);
+                    }
 
                         
 
-                        Instantiate(Enemys[i], spawnPoinrt2 + transform.TransformPoint(0, 0, 0), transform.rotation);
-                        spawned = false;
-                        SpecialSpawnWait = Random.Range(Xmin, Xmax);
-                        ArrowTimer = 0;
+                    Instantiate(Enemys[i], spawnPoinrt2 + transform.TransformPoint(0, 0, 0), transform.rotation);
+                    spawned = false;
+                    SpecialSpawnWait = Random.Range(Xmin, Xmax);
+                    ArrowTimer = 0;
 
-                        if (Xmax > XmaxMin)
-                        {
+                    if (Xmax > XmaxMin)
+                    {
 
-                            Xmax -= 4;
+                        Xmax -= 4;
 
-                        }
-                        else
-                        {
-                            Xmax = XmaxMin;
-                        }
+                    }
+                    else
+                    {
+                        Xmax = XmaxMin;
+                    }
 
 
-                        if (Xmin > XminMin)
-                        {
-                            Xmin -= 2;
-                        }
-                        else
-                        {
-                            Xmin = XminMin;
-                        }
-
+                    if (Xmin > XminMin)
+                    {
+                        Xmin -= 1;
+                    }
+                    else
+                    {
+                        Xmin = XminMin;
                     }
 
                 }
 
             }
 
-        }
-        else
-        {
-            ArrowTimer = 0;
-            timeTo = 0;
-            spawned = false;
         }
 
     }

@@ -198,10 +198,12 @@ public class Shop : MonoBehaviour
                     if (lastbuyHealth >= HealthPrice.Length)
                     {
                         HealtPriceText.text = "out of stock";
+                        ofs[0].SetActive(true);
                     }
                     else
                     {
                         HealtPriceText.text = HealthPrice[lastbuyHealth].ToString();
+                        ofs[0].SetActive(false);
                     }
 
                     MoreHealth = 3;
@@ -260,10 +262,12 @@ public class Shop : MonoBehaviour
                     if (lastbuySlowmo >= SlowmoPrice.Length)
                     {
                         SlowmoPriceText.text = "out of stock";
+                        ofs[1].SetActive(true);
                     }
                     else
                     {
                         SlowmoPriceText.text = SlowmoPrice[lastbuySlowmo].ToString();
+                        ofs[1].SetActive(false);
                     }
 
                     SlowmoTime = 0;
