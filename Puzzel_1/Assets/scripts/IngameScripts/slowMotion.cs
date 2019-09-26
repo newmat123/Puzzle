@@ -5,12 +5,51 @@ using UnityEngine;
 public class slowMotion : MonoBehaviour
 {
 
+    public GameObject[] holders;
+    public GameObject slBottun;
+
     public float slowDoenFactor = 0.5f;
     public float slowdownLength = 5f;
 
     private float timeTo;
 
     private bool slowMo = false;
+
+
+    public void Start()
+    {
+        
+        if(FindObjectOfType<Shop>().holder1)
+        {
+            holders[0].SetActive(true);
+            if (FindObjectOfType<Shop>().holder2)
+            {
+                holders[1].SetActive(true);
+                if (FindObjectOfType<Shop>().holder3)
+                {
+                    holders[2].SetActive(true);
+                }
+                else
+                {
+                    holders[2].SetActive(false);
+                }
+            }
+            else
+            {
+                holders[1].SetActive(false);
+                holders[2].SetActive(false);
+            }
+        }
+        else
+        {
+            for(int i = 0; i < holders.Length; i++)
+            {
+                holders[i].SetActive(false);
+            }
+        }
+
+    }
+
 
     private void Update()
     {
@@ -38,13 +77,19 @@ public class slowMotion : MonoBehaviour
         
     }
 
+    public void getSlowMo()
+    {
+        slBottun.SetActive(true);
+    }
+
     public void DoSlowmotion()
     {
         if(slowMo == false)
         {
-            Time.timeScale = slowDoenFactor;
+            Time.timeScale = 0.5f;
             Time.fixedDeltaTime = Time.timeScale * 0.02f;
             slowMo = true;
+            slBottun.SetActive(false);
         }
 
     }

@@ -6,7 +6,12 @@ using TMPro;
 public class Shop : MonoBehaviour
 {
 
+    public bool holder1;
+    public bool holder2;
+    public bool holder3;
+
     public GameObject[] lockui;
+    public GameObject[] ofs;
 
     public int MoreHealth = 3;
     public int SlowmoTime = 0;
@@ -63,10 +68,12 @@ public class Shop : MonoBehaviour
         if(lastbuyHealth >= HealthPrice.Length)
         {
             HealtPriceText.text = "out of stock";
+            ofs[0].SetActive(true);
         }
         else
         {
             HealtPriceText.text = HealthPrice[lastbuyHealth].ToString();
+            ofs[0].SetActive(false);
         }
 
 
@@ -99,25 +106,56 @@ public class Shop : MonoBehaviour
         if (lastbuySlowmo >= SlowmoPrice.Length)
         {
             SlowmoPriceText.text = "out of stock";
+            ofs[1].SetActive(true);
         }
         else
         {
             SlowmoPriceText.text = SlowmoPrice[lastbuySlowmo].ToString();
+            ofs[1].SetActive(false);
         }
 
-        if(SlowmoBuyed[0] == true)
+        chekSlow();
+
+    }
+
+    public void chekSlow()
+    {
+        if (SlowmoBuyed[0] == true)
         {
             lockui[0].SetActive(false);
             isSlowmoActive = true;
+            holder1 = true;
+
+            if (SlowmoBuyed[4] == true)
+            {
+                holder2 = true;
+                if (SlowmoBuyed[5] == true)
+                {
+                    holder3 = true;
+                }
+                else
+                {
+                    holder3 = false;
+                }
+
+            }
+            else
+            {
+                holder2 = false;
+                holder3 = false;
+            }
+
         }
         else
         {
             lockui[0].SetActive(true);
             isSlowmoActive = false;
+            holder1 = false;
+            holder2 = false;
+            holder3 = false;
         }
 
     }
-
 
     public void BuyHealt()
     {
@@ -230,6 +268,7 @@ public class Shop : MonoBehaviour
 
                     SlowmoTime = 0;
                     SlowmoTime += lastbuySlowmo * multiplayer;
+                    chekSlow();
 
                 }
 

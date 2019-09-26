@@ -165,6 +165,9 @@ public class ScoreScript : MonoBehaviour
 
         FindObjectOfType<speedHolder>().Reset();
         FindObjectOfType<EnemySpawnScript>().startWaiter();
+
+        FindObjectOfType<slowMotion>().Start();
+
     }
 
 

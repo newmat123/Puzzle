@@ -101,7 +101,7 @@ public class EnemyHit : MonoBehaviour
                 {
 
                     FindObjectOfType<ScoreScript>().PlusOneSpecial();
-                    FindObjectOfType<slowMotion>().DoSlowmotion();
+                    FindObjectOfType<slowMotion>().getSlowMo();
 
                 }
 
