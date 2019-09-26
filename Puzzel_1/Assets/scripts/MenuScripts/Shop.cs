@@ -9,6 +9,8 @@ public class Shop : MonoBehaviour
     public GameObject[] lockui;
 
     public int MoreHealth = 3;
+    public int SlowmoTime = 0;
+    public bool isSlowmoActive = false;
 
     public GameObject[] Health;
     public GameObject[] Slowmo;
@@ -21,6 +23,7 @@ public class Shop : MonoBehaviour
 
     [Space(20)]
 
+    int multiplayer = 3;
     int lastbuyHealth = 0;
     int lastbuySlowmo = 0;
     public int money;
@@ -90,6 +93,8 @@ public class Shop : MonoBehaviour
 
         }
 
+        SlowmoTime = 0;
+        SlowmoTime += lastbuySlowmo * multiplayer;
 
         if (lastbuySlowmo >= SlowmoPrice.Length)
         {
@@ -103,10 +108,12 @@ public class Shop : MonoBehaviour
         if(SlowmoBuyed[0] == true)
         {
             lockui[0].SetActive(false);
+            isSlowmoActive = true;
         }
         else
         {
             lockui[0].SetActive(true);
+            isSlowmoActive = false;
         }
 
     }
@@ -209,6 +216,7 @@ public class Shop : MonoBehaviour
 
                     }
 
+                    isSlowmoActive = true;
                     lastbuySlowmo++;
 
                     if (lastbuySlowmo >= SlowmoPrice.Length)
@@ -219,7 +227,10 @@ public class Shop : MonoBehaviour
                     {
                         SlowmoPriceText.text = SlowmoPrice[lastbuySlowmo].ToString();
                     }
-                    
+
+                    SlowmoTime = 0;
+                    SlowmoTime += lastbuySlowmo * multiplayer;
+
                 }
 
             }

@@ -83,7 +83,18 @@ public class EnemySpawnScript : MonoBehaviour
                     if (timeTo >= 2)
                     {
 
-                        int i = Random.Range(1, Enemys.Length);
+                        int i;
+
+                        if (FindObjectOfType<Shop>().isSlowmoActive == true)
+                        {
+                            i = Random.Range(1, Enemys.Length);
+                        }
+                        else
+                        {
+                            i = Random.Range(1, Enemys.Length-1);
+                        }
+
+                        
 
                         Instantiate(Enemys[i], spawnPoinrt2 + transform.TransformPoint(0, 0, 0), transform.rotation);
                         spawned = false;

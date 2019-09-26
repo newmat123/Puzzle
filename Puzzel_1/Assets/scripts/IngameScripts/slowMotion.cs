@@ -20,7 +20,7 @@ public class slowMotion : MonoBehaviour
 
             timeTo += Time.deltaTime;
 
-            if(timeTo > 3) // eller det man har købt sig til. ska komme fra shop scriptet
+            if(timeTo > FindObjectOfType<Shop>().SlowmoTime) 
             {
 
                 Time.timeScale += (1f / slowdownLength) * Time.deltaTime;
@@ -42,7 +42,7 @@ public class slowMotion : MonoBehaviour
     {
         if(slowMo == false)
         {
-            Time.timeScale = 0.5f;
+            Time.timeScale = slowDoenFactor;
             Time.fixedDeltaTime = Time.timeScale * 0.02f;
             slowMo = true;
         }
