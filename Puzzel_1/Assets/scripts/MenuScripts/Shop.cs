@@ -6,26 +6,35 @@ using TMPro;
 public class Shop : MonoBehaviour
 {
 
+    public GameObject[] lockui;
+
     public int MoreHealth = 3;
 
     public GameObject[] Health;
+    public GameObject[] Slowmo;
 
     public bool[] HealthBuyed = new bool[] {};
+    public bool[] SlowmoBuyed = new bool[] {};
 
-    public int[] price = new int[] {};
+    public int[] HealthPrice = new int[] {};
+    public int[] SlowmoPrice = new int[] {};
 
     [Space(20)]
 
-    int lastbuy = 0;
+    int lastbuyHealth = 0;
+    int lastbuySlowmo = 0;
     public int money;
 
     [Space(20)]
 
     public TextMeshProUGUI HealtPriceText;
+    public TextMeshProUGUI SlowmoPriceText;
 
 
     public void updateShop()
     {
+
+        //health
 
         for (int i = 0; i < HealthBuyed.Length; i++)
         {
@@ -36,7 +45,7 @@ public class Shop : MonoBehaviour
             {
                 Health[i].SetActive(true);
 
-                lastbuy = i + 1;
+                lastbuyHealth = i + 1;
             }
             else
             {
@@ -46,17 +55,60 @@ public class Shop : MonoBehaviour
         }
 
         MoreHealth = 3;
-        MoreHealth += lastbuy;
+        MoreHealth += lastbuyHealth;
 
-        if(lastbuy >= price.Length)
+        if(lastbuyHealth >= HealthPrice.Length)
         {
             HealtPriceText.text = "out of stock";
         }
         else
         {
-            HealtPriceText.text = price[lastbuy].ToString();
+            HealtPriceText.text = HealthPrice[lastbuyHealth].ToString();
         }
-        
+
+
+
+
+
+        //slowmo
+
+        for (int i = 0; i < SlowmoBuyed.Length; i++)
+        {
+
+            SlowmoBuyed[i] = intToBool(PlayerPrefs.GetInt("SlowmoBool" + i));
+
+            if (SlowmoBuyed[i] == true)
+            {
+                Slowmo[i].SetActive(true);
+
+                lastbuySlowmo = i + 1;
+            }
+            else
+            {
+                Slowmo[i].SetActive(false);
+            }
+
+        }
+
+
+        if (lastbuySlowmo >= SlowmoPrice.Length)
+        {
+            SlowmoPriceText.text = "out of stock";
+        }
+        else
+        {
+            SlowmoPriceText.text = SlowmoPrice[lastbuySlowmo].ToString();
+        }
+
+        if(SlowmoBuyed[0] == true)
+        {
+            lockui[0].SetActive(false);
+        }
+        else
+        {
+            lockui[0].SetActive(true);
+        }
+
     }
 
 
@@ -66,7 +118,7 @@ public class Shop : MonoBehaviour
         bool buyable = true;
         money = PlayerPrefs.GetInt("myCash");
 
-        if (lastbuy >= price.Length)
+        if (lastbuyHealth >= HealthPrice.Length)
         {
             buyable = false;
         }
@@ -74,16 +126,16 @@ public class Shop : MonoBehaviour
         if (buyable)
         {
 
-            if(money >= price[lastbuy])
+            if(money >= HealthPrice[lastbuyHealth])
             {
 
-                if(lastbuy < price.Length)
+                if(lastbuyHealth < HealthPrice.Length)
                 {
 
-                    Health[lastbuy].SetActive(true);
-                    HealthBuyed[lastbuy] = true;
+                    Health[lastbuyHealth].SetActive(true);
+                    HealthBuyed[lastbuyHealth] = true;
 
-                    money -= price[lastbuy];
+                    money -= HealthPrice[lastbuyHealth];
 
                     PlayerPrefs.SetInt("myCash", money);
 
@@ -96,19 +148,19 @@ public class Shop : MonoBehaviour
 
                     }
 
-                    lastbuy++;
+                    lastbuyHealth++;
 
-                    if (lastbuy >= price.Length)
+                    if (lastbuyHealth >= HealthPrice.Length)
                     {
                         HealtPriceText.text = "out of stock";
                     }
                     else
                     {
-                        HealtPriceText.text = price[lastbuy].ToString();
+                        HealtPriceText.text = HealthPrice[lastbuyHealth].ToString();
                     }
 
                     MoreHealth = 3;
-                    MoreHealth += lastbuy;
+                    MoreHealth += lastbuyHealth;
 
                 }
 
@@ -118,6 +170,65 @@ public class Shop : MonoBehaviour
 
     }
 
+
+    public void BuyMoreSlowmoTime()
+    {
+
+        bool buyable = true;
+        money = PlayerPrefs.GetInt("myCash");
+
+        if (lastbuySlowmo >= SlowmoPrice.Length)
+        {
+            buyable = false;
+        }
+
+        if (buyable)
+        {
+
+            if (money >= SlowmoPrice[lastbuySlowmo])
+            {
+
+                if (lastbuySlowmo < SlowmoPrice.Length)
+                {
+
+                    lockui[0].SetActive(false);
+
+                    Slowmo[lastbuySlowmo].SetActive(true);
+                    SlowmoBuyed[lastbuySlowmo] = true;
+
+                    money -= SlowmoPrice[lastbuySlowmo];
+
+                    PlayerPrefs.SetInt("myCash", money);
+
+                    FindObjectOfType<ScoreScript>().updateText();
+
+                    for (int i = 0; i < SlowmoBuyed.Length; i++)
+                    {
+
+                        PlayerPrefs.SetInt("SlowmoBool" + i, boolToInt(SlowmoBuyed[i]));
+
+                    }
+
+                    lastbuySlowmo++;
+
+                    if (lastbuySlowmo >= SlowmoPrice.Length)
+                    {
+                        SlowmoPriceText.text = "out of stock";
+                    }
+                    else
+                    {
+                        SlowmoPriceText.text = SlowmoPrice[lastbuySlowmo].ToString();
+                    }
+                    
+                }
+
+            }
+
+        }
+
+    }
+
+
     public void gggg()
     {
         for (int i = 0; i < HealthBuyed.Length; i++)
@@ -126,6 +237,13 @@ public class Shop : MonoBehaviour
             HealthBuyed[i] = false;
 
             PlayerPrefs.SetInt("HealtBool" + i, boolToInt(HealthBuyed[i]));
+        }
+        for (int i = 0; i < SlowmoBuyed.Length; i++)
+        {
+
+            SlowmoBuyed[i] = false;
+
+            PlayerPrefs.SetInt("SlowmoBool" + i, boolToInt(SlowmoBuyed[i]));
         }
         updateShop();
     }
