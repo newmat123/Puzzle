@@ -1,32 +1,42 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class Shop : MonoBehaviour
 {
 
+    public int MoreHealth = 3;
+
     public GameObject[] Health;
 
-    public bool[] HealthBuyed = new bool[] {false, false};
+    public bool[] HealthBuyed = new bool[] {};
 
-    public int money;
-    public int[] price = new int[] {100, 200};
+    public int[] price = new int[] {};
+
+    [Space(20)]
 
     int lastbuy = 0;
+    public int money;
 
-    void Start()
+    [Space(20)]
+
+    public TextMeshProUGUI HealtPriceText;
+
+
+    public void updateShop()
     {
 
         for (int i = 0; i < HealthBuyed.Length; i++)
         {
 
-            HealthBuyed[i] = intToBool(PlayerPrefs.GetInt("HealtBool"+ i));
+            HealthBuyed[i] = intToBool(PlayerPrefs.GetInt("HealtBool" + i));
 
-            if(HealthBuyed[i] == true)
+            if (HealthBuyed[i] == true)
             {
                 Health[i].SetActive(true);
 
-                lastbuy = i+1;
+                lastbuy = i + 1;
             }
             else
             {
@@ -35,20 +45,31 @@ public class Shop : MonoBehaviour
 
         }
 
-    }
+        MoreHealth = 3;
+        MoreHealth += lastbuy;
 
+        if(lastbuy >= price.Length)
+        {
+            HealtPriceText.text = "out of stock";
+        }
+        else
+        {
+            HealtPriceText.text = price[lastbuy].ToString();
+        }
+        
+    }
 
 
     public void BuyHealt()
     {
+
         bool buyable = true;
         money = PlayerPrefs.GetInt("myCash");
 
-        if(lastbuy >= price.Length)
+        if (lastbuy >= price.Length)
         {
             buyable = false;
         }
-
 
         if (buyable)
         {
@@ -76,6 +97,19 @@ public class Shop : MonoBehaviour
                     }
 
                     lastbuy++;
+
+                    if (lastbuy >= price.Length)
+                    {
+                        HealtPriceText.text = "out of stock";
+                    }
+                    else
+                    {
+                        HealtPriceText.text = price[lastbuy].ToString();
+                    }
+
+                    MoreHealth = 3;
+                    MoreHealth += lastbuy;
+
                 }
 
             }
@@ -93,6 +127,7 @@ public class Shop : MonoBehaviour
 
             PlayerPrefs.SetInt("HealtBool" + i, boolToInt(HealthBuyed[i]));
         }
+        updateShop();
     }
 
 

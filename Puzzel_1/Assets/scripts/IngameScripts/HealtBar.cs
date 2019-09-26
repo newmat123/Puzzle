@@ -8,12 +8,10 @@ public class HealtBar : MonoBehaviour
     private Transform bar;
 
     public float damege;
-    public float amountOfDamege;
 
     private void Start()
     {
 
-        amountOfDamege = 0.25f;
         damege = 1;
         bar = transform.Find("bar");
 
@@ -22,7 +20,7 @@ public class HealtBar : MonoBehaviour
     private void Update()
     {
         
-        if(damege <= 0)
+        if(damege <= 0.0001)
         {
             damege = 1;
             SetSize(damege);
@@ -35,7 +33,7 @@ public class HealtBar : MonoBehaviour
     public void plusLife(int add)
     {
 
-        damege += (amountOfDamege * add);
+        damege += ((1f / FindObjectOfType<Shop>().MoreHealth) * add);
         if(damege > 1)
         {
             damege = 1;
@@ -48,7 +46,7 @@ public class HealtBar : MonoBehaviour
     public void doDamege()
     {
 
-        damege -= amountOfDamege;
+        damege -= (1f / FindObjectOfType<Shop>().MoreHealth);
 
         SetSize(damege);
 

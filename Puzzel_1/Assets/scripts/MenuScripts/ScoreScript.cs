@@ -69,6 +69,7 @@ public class ScoreScript : MonoBehaviour
         BestTime = PlayerPrefs.GetFloat("savedRecord");
 
         updateText();
+        FindObjectOfType<Shop>().updateShop();
 
         oldRecord.text = BestTime.ToString("F2");
 
@@ -204,6 +205,7 @@ public class ScoreScript : MonoBehaviour
         MenuHolder.SetActive(true);
         DeathUI.SetActive(false);
         SettingsMenu.SetActive(false);
+        Shop.SetActive(false);
 
     }
 
@@ -217,6 +219,8 @@ public class ScoreScript : MonoBehaviour
 
     public void ShopBottun()
     {
+
+        FindObjectOfType<Shop>().updateShop();
 
         Shop.SetActive(true);
         MenuHolder.SetActive(false);
