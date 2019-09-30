@@ -39,10 +39,10 @@ public class SoundManeger : MonoBehaviour
 
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
 
-        if (damp)
+        if (damp && !unDamp)
         {
 
             val -= 10000f * Time.deltaTime;
@@ -56,8 +56,9 @@ public class SoundManeger : MonoBehaviour
             Musik.GetComponent<AudioLowPassFilter>().cutoffFrequency = (val);
 
         }
+        
 
-        if (unDamp)
+        if (unDamp && !damp)
         {
 
             val += 10000f * Time.deltaTime;

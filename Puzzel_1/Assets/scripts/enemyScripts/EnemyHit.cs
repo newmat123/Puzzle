@@ -94,7 +94,7 @@ public class EnemyHit : MonoBehaviour
                 {
 
                     FindObjectOfType<ScoreScript>().PlusOneSpecial();
-                    FindObjectOfType<HealtBar>().plusLife(3);
+                    FindObjectOfType<HealtBar>().plusLife(FindObjectOfType<Shop>().HealthPowerup);
 
                 }
                 else if (this.gameObject.tag == "Slow")

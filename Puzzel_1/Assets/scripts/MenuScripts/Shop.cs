@@ -13,6 +13,7 @@ public class Shop : MonoBehaviour
     public GameObject[] lockui;
     public GameObject[] ofs;
 
+    public int HealthPowerup = 3;
     public int MoreHealth = 3;
     public int SlowmoTime = 0;
     public bool isSlowmoActive = false;
@@ -102,7 +103,8 @@ public class Shop : MonoBehaviour
 
         }
 
-        //here
+        HealthPowerup = 3;
+        HealthPowerup += lastbuyHealthPowerup;
 
         if (lastbuyHealthPowerup >= HealthPoweupPrice.Length)
         {
@@ -111,7 +113,7 @@ public class Shop : MonoBehaviour
         }
         else
         {
-            HealtPowerupPriceText.text = SlowmoPrice[lastbuySlowmo].ToString();
+            HealtPowerupPriceText.text = HealthPoweupPrice[lastbuyHealthPowerup].ToString();
             ofs[2].SetActive(false);
         }
 
@@ -293,20 +295,23 @@ public class Shop : MonoBehaviour
 
                     }
 
-                    lastbuyHealthPowerup++;
+                    isSlowmoActive = true;
+                    lastbuySlowmo++;
 
-                    if (lastbuyHealthPowerup >= HealthPoweupPrice.Length)
+                    if (lastbuySlowmo >= SlowmoPrice.Length)
                     {
-                        HealtPowerupPriceText.text = "out of stock";
-                        ofs[2].SetActive(true);
+                        SlowmoPriceText.text = "out of stock";
+                        ofs[1].SetActive(true);
                     }
                     else
                     {
-                        HealtPowerupPriceText.text = HealthPoweupPrice[lastbuyHealthPowerup].ToString();
-                        ofs[2].SetActive(false);
+                        SlowmoPriceText.text = SlowmoPrice[lastbuySlowmo].ToString();
+                        ofs[1].SetActive(false);
                     }
 
-                    //heare
+                    SlowmoTime = 0;
+                    SlowmoTime += lastbuySlowmo * multiplayer;
+                    chekSlow();
 
                 }
 
@@ -353,23 +358,21 @@ public class Shop : MonoBehaviour
 
                     }
 
-                    isSlowmoActive = true;
-                    lastbuySlowmo++;
+                    lastbuyHealthPowerup++;
 
-                    if (lastbuySlowmo >= SlowmoPrice.Length)
+                    if (lastbuyHealthPowerup >= HealthPoweupPrice.Length)
                     {
-                        SlowmoPriceText.text = "out of stock";
-                        ofs[1].SetActive(true);
+                        HealtPowerupPriceText.text = "out of stock";
+                        ofs[2].SetActive(true);
                     }
                     else
                     {
-                        SlowmoPriceText.text = SlowmoPrice[lastbuySlowmo].ToString();
-                        ofs[1].SetActive(false);
+                        HealtPowerupPriceText.text = HealthPoweupPrice[lastbuyHealthPowerup].ToString();
+                        ofs[2].SetActive(false);
                     }
 
-                    SlowmoTime = 0;
-                    SlowmoTime += lastbuySlowmo * multiplayer;
-                    chekSlow();
+                    HealthPowerup = 3;
+                    HealthPowerup += lastbuyHealthPowerup;
 
                 }
 
