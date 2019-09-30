@@ -19,24 +19,29 @@ public class Shop : MonoBehaviour
 
     public GameObject[] Health;
     public GameObject[] Slowmo;
+    public GameObject[] HPowerup;
 
     public bool[] HealthBuyed = new bool[] {};
     public bool[] SlowmoBuyed = new bool[] {};
+    public bool[] HealthPoweupBuyed = new bool[] { };
 
     public int[] HealthPrice = new int[] {};
     public int[] SlowmoPrice = new int[] {};
+    public int[] HealthPoweupPrice = new int[] { };
 
     [Space(20)]
 
     int multiplayer = 3;
     int lastbuyHealth = 0;
     int lastbuySlowmo = 0;
+    int lastbuyHealthPowerup = 0;
     public int money;
 
     [Space(20)]
 
     public TextMeshProUGUI HealtPriceText;
     public TextMeshProUGUI SlowmoPriceText;
+    public TextMeshProUGUI HealtPowerupPriceText;
 
 
     public void updateShop()
@@ -77,6 +82,38 @@ public class Shop : MonoBehaviour
         }
 
 
+        //HealthPowerup
+
+        for (int i = 0; i < HealthPoweupBuyed.Length; i++)
+        {
+
+            HealthPoweupBuyed[i] = intToBool(PlayerPrefs.GetInt("HealthPowerupBool" + i));
+
+            if (HealthPoweupBuyed[i] == true)
+            {
+                HPowerup[i].SetActive(true);
+
+                lastbuyHealthPowerup = i + 1;
+            }
+            else
+            {
+                HPowerup[i].SetActive(false);
+            }
+
+        }
+
+        //here
+
+        if (lastbuyHealthPowerup >= HealthPoweupPrice.Length)
+        {
+            HealtPowerupPriceText.text = "out of stock";
+            ofs[2].SetActive(true);
+        }
+        else
+        {
+            HealtPowerupPriceText.text = SlowmoPrice[lastbuySlowmo].ToString();
+            ofs[2].SetActive(false);
+        }
 
 
 
@@ -126,7 +163,7 @@ public class Shop : MonoBehaviour
             isSlowmoActive = true;
             holder1 = true;
 
-            if (SlowmoBuyed[4] == true)
+            if (SlowmoBuyed[2] == true)
             {
                 holder2 = true;
                 if (SlowmoBuyed[5] == true)
@@ -256,6 +293,66 @@ public class Shop : MonoBehaviour
 
                     }
 
+                    lastbuyHealthPowerup++;
+
+                    if (lastbuyHealthPowerup >= HealthPoweupPrice.Length)
+                    {
+                        HealtPowerupPriceText.text = "out of stock";
+                        ofs[2].SetActive(true);
+                    }
+                    else
+                    {
+                        HealtPowerupPriceText.text = HealthPoweupPrice[lastbuyHealthPowerup].ToString();
+                        ofs[2].SetActive(false);
+                    }
+
+                    //heare
+
+                }
+
+            }
+
+        }
+
+    }
+
+
+    public void BuyMoreHealthPowerup()
+    {
+
+        bool buyable = true;
+        money = PlayerPrefs.GetInt("myCash");
+
+        if (lastbuyHealthPowerup >= HealthPoweupPrice.Length)
+        {
+            buyable = false;
+        }
+
+        if (buyable)
+        {
+
+            if (money >= HealthPoweupPrice[lastbuyHealthPowerup])
+            {
+
+                if (lastbuyHealthPowerup < HealthPoweupPrice.Length)
+                {
+
+                    HPowerup[lastbuyHealthPowerup].SetActive(true);
+                    HealthPoweupBuyed[lastbuyHealthPowerup] = true;
+
+                    money -= HealthPoweupPrice[lastbuyHealthPowerup];
+
+                    PlayerPrefs.SetInt("myCash", money);
+
+                    FindObjectOfType<ScoreScript>().updateText();
+
+                    for (int i = 0; i < HealthPoweupBuyed.Length; i++)
+                    {
+
+                        PlayerPrefs.SetInt("HealthPowerupBool" + i, boolToInt(HealthPoweupBuyed[i]));
+
+                    }
+
                     isSlowmoActive = true;
                     lastbuySlowmo++;
 
@@ -283,6 +380,7 @@ public class Shop : MonoBehaviour
     }
 
 
+
     public void gggg()
     {
         for (int i = 0; i < HealthBuyed.Length; i++)
@@ -298,6 +396,13 @@ public class Shop : MonoBehaviour
             SlowmoBuyed[i] = false;
 
             PlayerPrefs.SetInt("SlowmoBool" + i, boolToInt(SlowmoBuyed[i]));
+        }
+        for (int i = 0; i < HealthPoweupBuyed.Length; i++)
+        {
+
+            HealthPoweupBuyed[i] = false;
+
+            PlayerPrefs.SetInt("HealthPowerupBool" + i, boolToInt(HealthPoweupBuyed[i]));
         }
         updateShop();
     }
