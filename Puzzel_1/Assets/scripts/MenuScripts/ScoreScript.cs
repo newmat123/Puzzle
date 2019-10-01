@@ -170,7 +170,10 @@ public class ScoreScript : MonoBehaviour
 
     }
 
-
+    public void beforeEnding()
+    {
+        //se ad for at fortsætte
+    }
 
     public void endGame()
     {
