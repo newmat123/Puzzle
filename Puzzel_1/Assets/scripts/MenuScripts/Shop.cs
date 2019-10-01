@@ -6,6 +6,8 @@ using TMPro;
 public class Shop : MonoBehaviour
 {
 
+    public GameObject[] texts;
+
     public bool holder1;
     public bool holder2;
     public bool holder3;
@@ -248,6 +250,8 @@ public class Shop : MonoBehaviour
                     MoreHealth = 3;
                     MoreHealth += lastbuyHealth;
 
+                    Instantiate(texts[0]).transform.parent = gameObject.transform;
+
                 }
 
             }
@@ -313,6 +317,8 @@ public class Shop : MonoBehaviour
                     SlowmoTime += lastbuySlowmo * multiplayer;
                     chekSlow();
 
+                    Instantiate(texts[2]).transform.parent = gameObject.transform;
+
                 }
 
             }
@@ -373,6 +379,8 @@ public class Shop : MonoBehaviour
 
                     HealthPowerup = 3;
                     HealthPowerup += lastbuyHealthPowerup;
+
+                    Instantiate(texts[1]).transform.parent = gameObject.transform;
 
                 }
 

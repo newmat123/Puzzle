@@ -7640,6 +7640,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5dbd8052c09754241b0d839277a1d04c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  texts:
+  - {fileID: 307256476014008498, guid: 4f90828b5c396c84f99d424c0174b425, type: 3}
+  - {fileID: 2602863877749592511, guid: 20b7dd341b25d8949807696508cf4be5, type: 3}
+  - {fileID: 4319345621996820004, guid: 4b900ec2f95b0d74893b3289af94e8cc, type: 3}
   holder1: 0
   holder2: 0
   holder3: 0
