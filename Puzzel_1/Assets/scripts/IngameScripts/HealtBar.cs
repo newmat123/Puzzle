@@ -24,11 +24,15 @@ public class HealtBar : MonoBehaviour
         {
             damege = 1;
             SetSize(damege);
-            FindObjectOfType<ScoreScript>().endGame();
+            FindObjectOfType<ScoreScript>().beforeEnding();
         }
 
     }
 
+    public void heWhatchedTheAd()
+    {
+    //gfdkj
+    }
 
     public void plusLife(int add)
     {

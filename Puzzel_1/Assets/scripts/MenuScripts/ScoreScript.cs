@@ -52,12 +52,14 @@ public class ScoreScript : MonoBehaviour
     public GameObject SettingsMenu;
     public GameObject Shop;
     public GameObject PauseMenu;
+    public GameObject rewardedAdBottun;
 
 
 
     void Start()
     {
 
+        rewardedAdBottun.SetActive(false);
         PauseMenu.SetActive(false);
         Shop.SetActive(false);
         SettingsMenu.SetActive(false);
@@ -171,10 +173,7 @@ public class ScoreScript : MonoBehaviour
 
     }
 
-    public void beforeEnding()
-    {
-        //se ad for at fortsætte
-    }
+
     
     public void pauseGame()
     {
@@ -192,6 +191,26 @@ public class ScoreScript : MonoBehaviour
        
     }
 
+    public void beforeEnding()
+    {
+
+        Time.timeScale = 0;
+
+        rewardedAdBottun.SetActive(true);
+        
+        FindObjectOfType<adScript>().rewardedAd = true;
+
+    }
+
+    public void continueGame()
+    {
+
+        Time.timeScale = 1;
+
+        rewardedAdBottun.SetActive(false);
+
+
+    }
 
     public void endGame()
     {
@@ -208,6 +227,7 @@ public class ScoreScript : MonoBehaviour
         GameHolder.SetActive(false);
         GameUI.SetActive(false);
         PauseMenu.SetActive(false);
+        rewardedAdBottun.SetActive(false);
         gameactive = false;
 
         FindObjectOfType<adScript>().playedOne();

@@ -1,10 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Monetization;
+using UnityEngine.Advertisements;
 
 public class adScript : MonoBehaviour
 {
+
+    public bool rewardedAd;
+    public bool playAd;
+
+    float timer;
 
     int timesPlayed;
 
@@ -17,11 +22,52 @@ public class adScript : MonoBehaviour
     void Start()
     {
 
-        Monetization.Initialize(store_id, true);
+        rewardedAd = false;
+        playAd = false;
+
+        Advertisement.Initialize(store_id, true);
         timesPlayed = 0;
         
     }
 
+    private void Update()
+    {
+
+        if (rewardedAd)
+        {
+
+            if(playAd == false)
+            {
+
+                timer += Time.fixedDeltaTime;
+                if(timer >= 3)
+                {
+
+                    FindObjectOfType<ScoreScript>().endGame();
+                    rewardedAd = false;
+                    timer = 0;
+
+                }
+
+            }
+            else
+            {
+
+                FindObjectOfType<ScoreScript>().continueGame();
+                rewardedAd = false;
+                timer = 0;
+                playAd = false;
+                   
+            }
+            
+        }
+
+    }
+
+    public void clkRewardedAd()
+    {
+        playAd = true;
+    }
 
     public void playedOne()
     {
@@ -31,17 +77,10 @@ public class adScript : MonoBehaviour
 
             timesPlayed = 0;
 
-            if (Monetization.IsReady(video_ad))
+            if (Advertisement.IsReady(video_ad))
             {
 
-                ShowAdPlacementContent ad = null;
-
-                ad = Monetization.GetPlacementContent(video_ad) as ShowAdPlacementContent;
-
-                if(ad != null)
-                {
-                    ad.Show();
-                }
+                Advertisement.Show(video_ad);
 
             }
 
