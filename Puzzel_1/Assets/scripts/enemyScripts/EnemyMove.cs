@@ -12,6 +12,8 @@ public class EnemyMove : MonoBehaviour
 
         Rigidbody2D RB = GetComponent<Rigidbody2D>();
 
+       
+
         RB.velocity = new Vector2(0, -FindObjectOfType<speedHolder>().Speed);
 
     }

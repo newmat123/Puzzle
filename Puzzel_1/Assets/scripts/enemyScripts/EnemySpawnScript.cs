@@ -61,7 +61,6 @@ public class EnemySpawnScript : MonoBehaviour
 
     void Update()
     {
-        
         ArrowTimer += Time.deltaTime;
         if (ArrowTimer > SpecialSpawnWait)
         {
@@ -93,10 +92,10 @@ public class EnemySpawnScript : MonoBehaviour
                     }
                     else
                     {
-                        i = Random.Range(1, Enemys.Length-1);
+                        i = Random.Range(1, Enemys.Length - 1);
                     }
 
-                        
+
 
                     Instantiate(Enemys[i], spawnPoinrt2 + transform.TransformPoint(0, 0, 0), transform.rotation);
                     spawned = false;
@@ -173,6 +172,7 @@ public class EnemySpawnScript : MonoBehaviour
                 }
 
             }
+            
 
         }
 

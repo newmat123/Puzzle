@@ -26,9 +26,8 @@ public class EnemyHit : MonoBehaviour
         //søger for at de forsviner når man dør
         if (FindObjectOfType<ScoreScript>().gameactive == false)
         {
-
             Destroy(gameObject);
-
+            
         }
 
         //søger for at man ikke mister liv på de brikker, som man allerede har mistet et liv på, når de falder ned.

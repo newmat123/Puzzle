@@ -51,12 +51,14 @@ public class ScoreScript : MonoBehaviour
     public GameObject CounterUI;
     public GameObject SettingsMenu;
     public GameObject Shop;
+    public GameObject PauseMenu;
 
 
 
     void Start()
     {
 
+        PauseMenu.SetActive(false);
         Shop.SetActive(false);
         SettingsMenu.SetActive(false);
         CounterUI.SetActive(false);
@@ -174,6 +176,23 @@ public class ScoreScript : MonoBehaviour
     {
         //se ad for at fortsætte
     }
+    
+    public void pauseGame()
+    {
+
+        PauseMenu.SetActive(true);
+        Time.timeScale = 0;
+        
+    }
+
+    public void unPauseGame()
+    {
+
+        PauseMenu.SetActive(false);
+        Time.timeScale = 1;
+       
+    }
+
 
     public void endGame()
     {
@@ -184,10 +203,14 @@ public class ScoreScript : MonoBehaviour
         SpecialPizzesText.text = SPuzzelPices.ToString();
         TotalPriceText.text = money.ToString();
 
+        Time.timeScale = 1;
+
         DeathUI.SetActive(true);
         GameHolder.SetActive(false);
         GameUI.SetActive(false);
+        PauseMenu.SetActive(false);
         gameactive = false;
+        
 
         FindObjectOfType<SoundManeger>().dampeSound();
 
