@@ -6,7 +6,6 @@ public class playerMovement : MonoBehaviour
 {
 
     public GameObject partikals;
-    public GameObject elements;
 
 
     void FixedUpdate()
@@ -40,12 +39,8 @@ public class playerMovement : MonoBehaviour
 
         Vector3 pos = transform.position + new Vector3(0, 1, 0);
 
-
-        elements = Instantiate(partikals, pos, transform.rotation);
-        Destroy(elements, 1);
+        Instantiate(partikals, pos, transform.rotation);
 
     }
-
-   
 
 }

@@ -5,6 +5,8 @@ using UnityEngine;
 public class EnemyHit : MonoBehaviour
 {
 
+    public GameObject partikals;
+
     Transform Player;
 
     float timeToDie = 0;
@@ -26,6 +28,9 @@ public class EnemyHit : MonoBehaviour
         //søger for at de forsviner når man dør
         if (FindObjectOfType<ScoreScript>().gameactive == false)
         {
+
+            Instantiate(partikals, transform.position, transform.rotation);
+
             Destroy(gameObject);
             
         }
@@ -49,7 +54,7 @@ public class EnemyHit : MonoBehaviour
             transform.rotation = Player.rotation;
 
             timeToDie += Time.deltaTime;
-            transform.position = Vector3.MoveTowards(transform.position, new Vector3(Player.position.x, Player.position.y + 0.91f, 0), 3f*Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, new Vector3(Player.position.x, Player.position.y + 0.91f, 0), 100f*Time.deltaTime);
 
             if (timeToDie >= 0.1)
             {

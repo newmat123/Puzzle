@@ -8,7 +8,6 @@ public class slowMotion : MonoBehaviour
     public GameObject[] holders;
     public GameObject[] slBottun;
 
-    public float slowDoenFactor = 0.5f;
     public float slowdownLength = 5f;
 
     private float timeTo;
@@ -124,7 +123,7 @@ public class slowMotion : MonoBehaviour
     {
         if(slowMo == false)
         {
-            Time.timeScale = 0.5f;
+            Time.timeScale = 0.4f;
             Time.fixedDeltaTime = Time.timeScale * 0.02f;
             slowMo = true;
 

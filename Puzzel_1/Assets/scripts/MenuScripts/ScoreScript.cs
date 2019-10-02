@@ -167,7 +167,6 @@ public class ScoreScript : MonoBehaviour
 
         FindObjectOfType<speedHolder>().Reset();
         FindObjectOfType<EnemySpawnScript>().startWaiter();
-
         FindObjectOfType<slowMotion>().Start();
 
     }
@@ -210,8 +209,8 @@ public class ScoreScript : MonoBehaviour
         GameUI.SetActive(false);
         PauseMenu.SetActive(false);
         gameactive = false;
-        
 
+        FindObjectOfType<adScript>().playedOne();
         FindObjectOfType<SoundManeger>().dampeSound();
 
     }
