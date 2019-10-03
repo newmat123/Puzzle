@@ -22,8 +22,7 @@ public class HealtBar : MonoBehaviour
         
         if(damege <= 0.0001)
         {
-            damege = 1;
-            SetSize(damege);
+            
             if(FindObjectOfType<adScript>().isAdPlayed == false)
             {
 
@@ -42,9 +41,10 @@ public class HealtBar : MonoBehaviour
 
     }
 
-    public void heWhatchedTheAd()
+    public void fullHealth()
     {
-    //gfdkj
+        damege = 1;
+        SetSize(damege);
     }
 
     public void plusLife(int add)

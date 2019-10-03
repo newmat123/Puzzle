@@ -214,7 +214,7 @@ public class ScoreScript : MonoBehaviour
 
     public void endGame()
     {
-
+        FindObjectOfType<HealtBar>().fullHealth();
         CalMoney();
 
         NormalPizzesText.text = PuzzelPices.ToString();
@@ -230,6 +230,7 @@ public class ScoreScript : MonoBehaviour
         rewardedAdBottun.SetActive(false);
         gameactive = false;
 
+        
         FindObjectOfType<adScript>().playedOne();
         FindObjectOfType<SoundManeger>().dampeSound();
 

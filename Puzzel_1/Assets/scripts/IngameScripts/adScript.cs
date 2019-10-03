@@ -27,7 +27,7 @@ public class adScript : MonoBehaviour
         rewardedAd = false;
         playAd = false;
 
-        Advertisement.Initialize(store_id, true);
+        Advertisement.Initialize(store_id);
         timesPlayed = 0;
         
     }
@@ -45,7 +45,7 @@ public class adScript : MonoBehaviour
                 {
 
                     timer += Time.fixedDeltaTime;
-                    if (timer >= 3f)
+                    if (timer >= 4f)
                     {
 
                         FindObjectOfType<ScoreScript>().endGame();
@@ -62,10 +62,7 @@ public class adScript : MonoBehaviour
                     {
 
                         Advertisement.Show(rewarded_video_ad, new ShowOptions() { resultCallback = HandleAdResult });
-                        playAd = false;
-                        rewardedAd = false;
-                        isAdPlayed = true;
-                        timer = 0f;
+                        
 
                     }
 
@@ -107,15 +104,28 @@ public class adScript : MonoBehaviour
         {
 
             case ShowResult.Finished:
+                FindObjectOfType<HealtBar>().fullHealth();
                 FindObjectOfType<ScoreScript>().continueGame();
+                playAd = false;
+                rewardedAd = false;
+                isAdPlayed = true;
+                timer = 0f;
                 break;
 
             case ShowResult.Skipped:
                 FindObjectOfType<ScoreScript>().endGame();
+                playAd = false;
+                rewardedAd = false;
+                isAdPlayed = false;
+                timer = 0f;
                 break;
 
             case ShowResult.Failed:
                 FindObjectOfType<ScoreScript>().endGame();
+                playAd = false;
+                rewardedAd = false;
+                isAdPlayed = false;
+                timer = 0f;
                 break;
 
         }
