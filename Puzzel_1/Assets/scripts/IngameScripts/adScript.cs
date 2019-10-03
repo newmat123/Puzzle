@@ -40,12 +40,12 @@ public class adScript : MonoBehaviour
             {
 
                 timer += Time.fixedDeltaTime;
-                if(timer >= 3)
+                if(timer >= 3f)
                 {
 
                     FindObjectOfType<ScoreScript>().endGame();
                     rewardedAd = false;
-                    timer = 0;
+                    timer = 0f;
 
                 }
 
@@ -53,11 +53,16 @@ public class adScript : MonoBehaviour
             else
             {
 
-                FindObjectOfType<ScoreScript>().continueGame();
-                rewardedAd = false;
-                timer = 0;
-                playAd = false;
-                   
+                if (Advertisement.IsReady(rewarded_video_ad))
+                {
+
+                    Advertisement.Show(rewarded_video_ad, new ShowOptions() { resultCallback = HandleAdResult });
+                    playAd = false;
+                    rewardedAd = false;
+                    timer = 0f;
+
+                }
+
             }
             
         }
@@ -72,7 +77,7 @@ public class adScript : MonoBehaviour
     public void playedOne()
     {
         timesPlayed++;
-        if(timesPlayed >= 4)
+        if(timesPlayed >= 4f)
         {
 
             timesPlayed = 0;
@@ -83,6 +88,37 @@ public class adScript : MonoBehaviour
                 Advertisement.Show(video_ad);
 
             }
+
+        }
+
+    }
+
+    private void HandleAdResult(ShowResult result)
+    {
+
+        switch (result)
+        {
+
+            case ShowResult.Finished:
+                FindObjectOfType<ScoreScript>().continueGame();
+                rewardedAd = false;
+                playAd = false;
+                timer = 0f;
+                break;
+
+            case ShowResult.Skipped:
+                FindObjectOfType<ScoreScript>().endGame();
+                rewardedAd = false;
+                playAd = false;
+                timer = 0f;
+                break;
+
+            case ShowResult.Failed:
+                FindObjectOfType<ScoreScript>().endGame();
+                rewardedAd = false;
+                playAd = false;
+                timer = 0f;
+                break;
 
         }
 
