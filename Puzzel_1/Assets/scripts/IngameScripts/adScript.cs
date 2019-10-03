@@ -6,6 +6,7 @@ using UnityEngine.Advertisements;
 public class adScript : MonoBehaviour
 {
 
+    public bool isAdPlayed;
     public bool rewardedAd;
     public bool playAd;
 
@@ -22,6 +23,7 @@ public class adScript : MonoBehaviour
     void Start()
     {
 
+        isAdPlayed = false;
         rewardedAd = false;
         playAd = false;
 
@@ -35,34 +37,39 @@ public class adScript : MonoBehaviour
 
         if (rewardedAd)
         {
-
-            if(playAd == false)
+            if (isAdPlayed == false)
             {
 
-                timer += Time.fixedDeltaTime;
-                if(timer >= 3f)
+
+                if (playAd == false)
                 {
 
-                    FindObjectOfType<ScoreScript>().endGame();
-                    rewardedAd = false;
-                    timer = 0f;
+                    timer += Time.fixedDeltaTime;
+                    if (timer >= 3f)
+                    {
+
+                        FindObjectOfType<ScoreScript>().endGame();
+                        rewardedAd = false;
+                        timer = 0f;
+
+                    }
 
                 }
-
-            }
-            else
-            {
-
-                if (Advertisement.IsReady(rewarded_video_ad))
+                else
                 {
 
-                    Advertisement.Show(rewarded_video_ad, new ShowOptions() { resultCallback = HandleAdResult });
-                    playAd = false;
-                    rewardedAd = false;
-                    timer = 0f;
+                    if (Advertisement.IsReady(rewarded_video_ad))
+                    {
+
+                        Advertisement.Show(rewarded_video_ad, new ShowOptions() { resultCallback = HandleAdResult });
+                        playAd = false;
+                        rewardedAd = false;
+                        isAdPlayed = true;
+                        timer = 0f;
+
+                    }
 
                 }
-
             }
             
         }
@@ -77,7 +84,7 @@ public class adScript : MonoBehaviour
     public void playedOne()
     {
         timesPlayed++;
-        if(timesPlayed >= 4f)
+        if(timesPlayed >= 3f)
         {
 
             timesPlayed = 0;
@@ -101,23 +108,14 @@ public class adScript : MonoBehaviour
 
             case ShowResult.Finished:
                 FindObjectOfType<ScoreScript>().continueGame();
-                rewardedAd = false;
-                playAd = false;
-                timer = 0f;
                 break;
 
             case ShowResult.Skipped:
                 FindObjectOfType<ScoreScript>().endGame();
-                rewardedAd = false;
-                playAd = false;
-                timer = 0f;
                 break;
 
             case ShowResult.Failed:
                 FindObjectOfType<ScoreScript>().endGame();
-                rewardedAd = false;
-                playAd = false;
-                timer = 0f;
                 break;
 
         }

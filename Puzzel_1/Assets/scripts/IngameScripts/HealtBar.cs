@@ -24,7 +24,20 @@ public class HealtBar : MonoBehaviour
         {
             damege = 1;
             SetSize(damege);
-            FindObjectOfType<ScoreScript>().beforeEnding();
+            if(FindObjectOfType<adScript>().isAdPlayed == false)
+            {
+
+                FindObjectOfType<ScoreScript>().beforeEnding();
+
+            }
+            else
+            {
+
+                FindObjectOfType<ScoreScript>().endGame();
+                FindObjectOfType<adScript>().isAdPlayed = false;
+
+            }
+            
         }
 
     }
