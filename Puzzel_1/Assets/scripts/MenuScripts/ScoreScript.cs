@@ -272,7 +272,6 @@ public class ScoreScript : MonoBehaviour
         FindObjectOfType<Shop>().updateShop();
 
         Shop.SetActive(true);
-        MenuHolder.SetActive(false);
 
     }
 
