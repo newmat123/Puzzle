@@ -71,7 +71,7 @@ public class Shop : MonoBehaviour
         }
 
         MoreHealth = 3;
-        MoreHealth += lastbuyHealth;
+        MoreHealth += 2 * lastbuyHealth;
 
         if(lastbuyHealth >= HealthPrice.Length)
         {

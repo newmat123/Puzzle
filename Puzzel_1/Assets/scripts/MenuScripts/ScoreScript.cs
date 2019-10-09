@@ -262,7 +262,6 @@ public class ScoreScript : MonoBehaviour
     {
 
         SettingsMenu.SetActive(true);
-        MenuHolder.SetActive(false);
 
     }
 
@@ -270,6 +269,7 @@ public class ScoreScript : MonoBehaviour
     {
 
         FindObjectOfType<Shop>().updateShop();
+        updateText();
 
         Shop.SetActive(true);
 
