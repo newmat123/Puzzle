@@ -4882,9 +4882,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isMutet: 0
+  SFXisMutet: 0
   on: {fileID: 1753183536}
   off: {fileID: 1289357890}
+  on1: {fileID: 83989226}
+  off1: {fileID: 1027785204}
   Musik: {fileID: 1294840389}
+  hit: {fileID: 9046996571128919525, guid: dce4818051c4e7048956a08c8b860572, type: 3}
+  Hurt: {fileID: 5340630365060439036, guid: 99d6ec78680578b4e87f2981ee00d513, type: 3}
+  Bottun: {fileID: 130505015799531321, guid: e6c4d0d1ab4d0f7498ba9c08617f0b66, type: 3}
 --- !u!1 &622277564
 GameObject:
   m_ObjectHideFlags: 0
@@ -5117,7 +5123,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 642712221}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 622090424}
+        m_MethodName: SFXOnOff
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &642712221

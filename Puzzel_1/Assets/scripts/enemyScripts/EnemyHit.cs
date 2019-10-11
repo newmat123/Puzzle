@@ -42,6 +42,7 @@ public class EnemyHit : MonoBehaviour
             FindObjectOfType<StressReceiver>().InduceStress(1);
             FindObjectOfType<HealtBar>().doDamege();
             Destroy(gameObject);
+            FindObjectOfType<SoundManeger>().HitSFX("missed");
 
         }
 
@@ -109,6 +110,8 @@ public class EnemyHit : MonoBehaviour
 
                 }
 
+                FindObjectOfType<SoundManeger>().HitSFX("hitCorrect");
+
             }//ellers tager den et liv osv
             else
             {
@@ -119,6 +122,7 @@ public class EnemyHit : MonoBehaviour
                 RB.AddForce(-collision.transform.position * 130);
 
                 FindObjectOfType<HealtBar>().doDamege();
+                FindObjectOfType<SoundManeger>().HitSFX("missed");
 
             }
 

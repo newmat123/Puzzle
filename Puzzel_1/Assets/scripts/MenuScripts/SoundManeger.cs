@@ -6,12 +6,19 @@ public class SoundManeger : MonoBehaviour
 {
 
     public bool isMutet = false;
+    public bool SFXisMutet = false;
 
     public GameObject on;
     public GameObject off;
 
+    public GameObject on1;
+    public GameObject off1;
+
     public GameObject Musik;
 
+    public GameObject hit;
+    public GameObject Hurt;
+    public GameObject Bottun;
 
     private bool damp;
     private bool unDamp;
@@ -37,6 +44,18 @@ public class SoundManeger : MonoBehaviour
 
         Musik.SetActive(!isMutet);
 
+        SFXisMutet = intToBool(PlayerPrefs.GetInt("muteSFX", 0));
+
+        if (SFXisMutet)
+        {
+            off1.SetActive(true);
+            on1.SetActive(false);
+        }
+        else
+        {
+            on1.SetActive(true);
+            off1.SetActive(false);
+        }
     }
 
     private void FixedUpdate()
@@ -111,9 +130,56 @@ public class SoundManeger : MonoBehaviour
 
         Musik.SetActive(!isMutet);
 
+        HitSFX("b");
+        
     }
 
+    public void SFXOnOff()
+    {
 
+        SFXisMutet = !SFXisMutet;
+
+        if (SFXisMutet)
+        {
+            off1.SetActive(true);
+            on1.SetActive(false);
+        }
+        else
+        {
+            on1.SetActive(true);
+            off1.SetActive(false);
+        }
+
+        PlayerPrefs.SetInt("muteSFX", boolToInt(SFXisMutet));
+
+        HitSFX("b");
+
+    }
+
+    public void HitSFX(string sound)
+    {
+
+        if (!SFXisMutet)
+        {
+
+            if(sound == "hitCorrect")
+            {
+                Instantiate(hit);
+            }
+
+            if(sound == "missed")
+            {
+                Instantiate(Hurt);
+            }
+
+            if(sound == "b")
+            {
+                Instantiate(Bottun);
+            }
+
+        }
+        
+    }
 
 
     int boolToInt(bool val)

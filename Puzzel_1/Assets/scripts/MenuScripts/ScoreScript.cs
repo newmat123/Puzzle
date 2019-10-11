@@ -164,7 +164,7 @@ public class ScoreScript : MonoBehaviour
         MenuHolder.SetActive(false);
 
         FindObjectOfType<SoundManeger>().unDampeSound();
-
+        FindObjectOfType<SoundManeger>().HitSFX("b");
     }
 
     public void afterCount()
@@ -193,7 +193,8 @@ public class ScoreScript : MonoBehaviour
         FindObjectOfType<BagGroundScript>().fadeBagground(false);
         PauseMenu.SetActive(true);
         Time.timeScale = 0;
-        
+        FindObjectOfType<SoundManeger>().HitSFX("b");
+
     }
 
     public void unPauseGame()
@@ -202,7 +203,8 @@ public class ScoreScript : MonoBehaviour
         FindObjectOfType<BagGroundScript>().fadeBagground(true);
         PauseMenu.SetActive(false);
         Time.timeScale = 1;
-       
+        FindObjectOfType<SoundManeger>().HitSFX("b");
+
     }
 
     public void beforeEnding()
@@ -272,7 +274,7 @@ public class ScoreScript : MonoBehaviour
         DeathUI.SetActive(false);
         FindObjectOfType<SettingsAnimScript>().settings(false);
         FindObjectOfType<shopAnimScript>().openShop(false);
-
+        FindObjectOfType<SoundManeger>().HitSFX("b");
     }
 
     public void settings()
@@ -280,6 +282,7 @@ public class ScoreScript : MonoBehaviour
 
         FindObjectOfType<SettingsAnimScript>().settings(true);
         FindObjectOfType<shopAnimScript>().openShop(false);
+        FindObjectOfType<SoundManeger>().HitSFX("b");
 
     }
 
@@ -291,6 +294,7 @@ public class ScoreScript : MonoBehaviour
 
         FindObjectOfType<shopAnimScript>().openShop(true);
         FindObjectOfType<SettingsAnimScript>().settings(false);
+        FindObjectOfType<SoundManeger>().HitSFX("b");
 
     }
 

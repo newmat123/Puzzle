@@ -258,6 +258,8 @@ public class Shop : MonoBehaviour
 
         }
 
+        FindObjectOfType<SoundManeger>().HitSFX("b");
+
     }
 
 
@@ -325,6 +327,8 @@ public class Shop : MonoBehaviour
 
         }
 
+        FindObjectOfType<SoundManeger>().HitSFX("b");
+
     }
 
 
@@ -387,6 +391,8 @@ public class Shop : MonoBehaviour
             }
 
         }
+
+        FindObjectOfType<SoundManeger>().HitSFX("b");
 
     }
 
