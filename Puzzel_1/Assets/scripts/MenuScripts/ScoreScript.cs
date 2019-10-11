@@ -8,6 +8,7 @@ public class ScoreScript : MonoBehaviour
 
     int SPuzzelPices = 0;
     int PuzzelPices = 0;
+    int MissedPuzzelPices = 0;
     int money = 0;
     int totalMoney;
 
@@ -16,6 +17,7 @@ public class ScoreScript : MonoBehaviour
 
     int PriceSpecial = 20;
     int PriceNormal = 5;
+    int PriceMissed = 10;
 
 
 
@@ -39,6 +41,7 @@ public class ScoreScript : MonoBehaviour
 
     public TextMeshProUGUI NormalPizzesText;
     public TextMeshProUGUI SpecialPizzesText;
+    public TextMeshProUGUI MissedPices;
     public TextMeshProUGUI TotalPriceText;
     public TextMeshProUGUI shopCash;
 
@@ -49,8 +52,6 @@ public class ScoreScript : MonoBehaviour
     public GameObject GameUI;
     public GameObject DeathUI;
     public GameObject CounterUI;
-    public GameObject SettingsMenu;
-    public GameObject Shop;
     public GameObject PauseMenu;
     public GameObject rewardedAdBottun;
 
@@ -61,8 +62,6 @@ public class ScoreScript : MonoBehaviour
 
         rewardedAdBottun.SetActive(false);
         PauseMenu.SetActive(false);
-        Shop.SetActive(false);
-        SettingsMenu.SetActive(false);
         CounterUI.SetActive(false);
         DeathUI.SetActive(false);
         GameHolder.SetActive(false);
@@ -114,12 +113,14 @@ public class ScoreScript : MonoBehaviour
     }
 
 
+    public void missedOne()
+    {
+        MissedPuzzelPices += 1;
+    }
 
     public void PlusOne()
     {
-
         PuzzelPices += 1;
-
     }
 
     public void PlusOneSpecial()
@@ -139,7 +140,13 @@ public class ScoreScript : MonoBehaviour
     public void CalMoney()
     {
 
-        money = (PuzzelPices * PriceNormal) + (SPuzzelPices * PriceSpecial);
+        money = ((PuzzelPices * PriceNormal) + (SPuzzelPices * PriceSpecial)) - (MissedPuzzelPices * PriceMissed);
+
+        if(money < 0)
+        {
+            money = 0;
+        }
+
         totalMoney += money;
         GemCash(totalMoney);
 
@@ -149,6 +156,9 @@ public class ScoreScript : MonoBehaviour
 
     public void startGame()
     {
+
+        FindObjectOfType<SettingsAnimScript>().settings(false);
+        FindObjectOfType<shopAnimScript>().openShop(false);
 
         CounterUI.SetActive(true);
         MenuHolder.SetActive(false);
@@ -219,6 +229,7 @@ public class ScoreScript : MonoBehaviour
 
         NormalPizzesText.text = PuzzelPices.ToString();
         SpecialPizzesText.text = SPuzzelPices.ToString();
+        MissedPices.text = MissedPuzzelPices.ToString();
         TotalPriceText.text = money.ToString();
 
         Time.timeScale = 1;
@@ -253,15 +264,15 @@ public class ScoreScript : MonoBehaviour
 
         MenuHolder.SetActive(true);
         DeathUI.SetActive(false);
-        SettingsMenu.SetActive(false);
-        Shop.SetActive(false);
+        FindObjectOfType<SettingsAnimScript>().settings(false);
+        FindObjectOfType<shopAnimScript>().openShop(false);
 
     }
 
     public void settings()
     {
 
-        SettingsMenu.SetActive(true);
+        FindObjectOfType<SettingsAnimScript>().settings(true);
 
     }
 
@@ -271,7 +282,7 @@ public class ScoreScript : MonoBehaviour
         FindObjectOfType<Shop>().updateShop();
         updateText();
 
-        Shop.SetActive(true);
+        FindObjectOfType<shopAnimScript>().openShop(true);
 
     }
 

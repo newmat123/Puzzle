@@ -63,6 +63,8 @@ public class HealtBar : MonoBehaviour
     public void doDamege()
     {
 
+        FindObjectOfType<ScoreScript>().missedOne();
+
         damege -= (1f / FindObjectOfType<Shop>().MoreHealth);
 
         SetSize(damege);
