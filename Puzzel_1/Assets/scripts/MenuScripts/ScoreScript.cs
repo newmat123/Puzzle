@@ -170,6 +170,8 @@ public class ScoreScript : MonoBehaviour
     public void afterCount()
     {
 
+        FindObjectOfType<BagGroundScript>().fadeBagground(true);
+
         timeCount = 0f;
 
         CounterUI.SetActive(false);
@@ -188,6 +190,7 @@ public class ScoreScript : MonoBehaviour
     public void pauseGame()
     {
 
+        FindObjectOfType<BagGroundScript>().fadeBagground(false);
         PauseMenu.SetActive(true);
         Time.timeScale = 0;
         
@@ -196,6 +199,7 @@ public class ScoreScript : MonoBehaviour
     public void unPauseGame()
     {
 
+        FindObjectOfType<BagGroundScript>().fadeBagground(true);
         PauseMenu.SetActive(false);
         Time.timeScale = 1;
        
@@ -203,7 +207,7 @@ public class ScoreScript : MonoBehaviour
 
     public void beforeEnding()
     {
-
+        FindObjectOfType<BagGroundScript>().fadeBagground(false);
         Time.timeScale = 0;
 
         rewardedAdBottun.SetActive(true);
@@ -215,6 +219,7 @@ public class ScoreScript : MonoBehaviour
     public void continueGame()
     {
 
+        FindObjectOfType<BagGroundScript>().fadeBagground(true);
         Time.timeScale = 1;
 
         rewardedAdBottun.SetActive(false);
@@ -224,6 +229,7 @@ public class ScoreScript : MonoBehaviour
 
     public void endGame()
     {
+        FindObjectOfType<BagGroundScript>().fadeBagground(false);
         FindObjectOfType<HealtBar>().fullHealth();
         CalMoney();
 
@@ -273,6 +279,7 @@ public class ScoreScript : MonoBehaviour
     {
 
         FindObjectOfType<SettingsAnimScript>().settings(true);
+        FindObjectOfType<shopAnimScript>().openShop(false);
 
     }
 
@@ -283,6 +290,7 @@ public class ScoreScript : MonoBehaviour
         updateText();
 
         FindObjectOfType<shopAnimScript>().openShop(true);
+        FindObjectOfType<SettingsAnimScript>().settings(false);
 
     }
 
