@@ -15,7 +15,7 @@ public class ScoreScript : MonoBehaviour
 
     int PriceSpecial = 20;
     int PriceNormal = 5;
-    int PriceMissed = 10;
+    int PriceMissed = 5;
 
 
     float BestTime;
