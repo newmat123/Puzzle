@@ -13,17 +13,13 @@ public class ScoreScript : MonoBehaviour
     int totalMoney;
 
 
-
-
     int PriceSpecial = 20;
     int PriceNormal = 5;
     int PriceMissed = 10;
 
 
-
     float BestTime;
     float timeCount = 0;
-
 
 
     [Space(20)]
@@ -189,11 +185,17 @@ public class ScoreScript : MonoBehaviour
     
     public void pauseGame()
     {
-
-        FindObjectOfType<BagGroundScript>().fadeBagground(false);
-        PauseMenu.SetActive(true);
-        Time.timeScale = 0;
-        FindObjectOfType<SoundManeger>().HitSFX("b");
+        if (!rewardedAdBottun.activeInHierarchy)
+        {
+            FindObjectOfType<BagGroundScript>().fadeBagground(false);
+            PauseMenu.SetActive(true);
+            Time.timeScale = 0;
+            FindObjectOfType<SoundManeger>().HitSFX("b");
+        }
+        else
+        {
+            PauseMenu.SetActive(false);
+        }
 
     }
 
@@ -268,6 +270,7 @@ public class ScoreScript : MonoBehaviour
 
         SPuzzelPices = 0;
         PuzzelPices = 0;
+        MissedPuzzelPices = 0;
         newrecord.text = "";
 
         MenuHolder.SetActive(true);
