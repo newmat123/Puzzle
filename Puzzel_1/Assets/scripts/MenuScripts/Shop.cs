@@ -67,7 +67,6 @@ public class Shop : MonoBehaviour
             {
                 Health[i].SetActive(false);
             }
-
         }
 
         MoreHealth = 3;
@@ -102,7 +101,6 @@ public class Shop : MonoBehaviour
             {
                 HPowerup[i].SetActive(false);
             }
-
         }
 
         HealthPowerup = 3;
@@ -138,7 +136,6 @@ public class Shop : MonoBehaviour
             {
                 Slowmo[i].SetActive(false);
             }
-
         }
 
         SlowmoTime = 0;
@@ -178,14 +175,12 @@ public class Shop : MonoBehaviour
                 {
                     holder3 = false;
                 }
-
             }
             else
             {
                 holder2 = false;
                 holder3 = false;
             }
-
         }
         else
         {
@@ -195,12 +190,12 @@ public class Shop : MonoBehaviour
             holder2 = false;
             holder3 = false;
         }
-
     }
 
     public void BuyHealt()
     {
 
+        FindObjectOfType<SoundManeger>().HitSFX("b");
         bool buyable = true;
         money = PlayerPrefs.GetInt("myCash");
 
@@ -253,19 +248,15 @@ public class Shop : MonoBehaviour
                     Instantiate(texts[0]).transform.parent = gameObject.transform;
 
                 }
-
             }
-
         }
-
-        FindObjectOfType<SoundManeger>().HitSFX("b");
-
     }
 
 
     public void BuyMoreSlowmoTime()
     {
 
+        FindObjectOfType<SoundManeger>().HitSFX("b");
         bool buyable = true;
         money = PlayerPrefs.GetInt("myCash");
 
@@ -322,19 +313,15 @@ public class Shop : MonoBehaviour
                     Instantiate(texts[2]).transform.parent = gameObject.transform;
 
                 }
-
             }
-
         }
-
-        FindObjectOfType<SoundManeger>().HitSFX("b");
-
     }
 
 
     public void BuyMoreHealthPowerup()
     {
 
+        FindObjectOfType<SoundManeger>().HitSFX("b");
         bool buyable = true;
         money = PlayerPrefs.GetInt("myCash");
 
@@ -387,13 +374,8 @@ public class Shop : MonoBehaviour
                     Instantiate(texts[1]).transform.parent = gameObject.transform;
 
                 }
-
             }
-
         }
-
-        FindObjectOfType<SoundManeger>().HitSFX("b");
-
     }
 
 

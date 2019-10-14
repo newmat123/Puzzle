@@ -20,6 +20,7 @@ public class SoundManeger : MonoBehaviour
     public GameObject Hurt;
     public GameObject Bottun;
 
+    private AudioSource a;
     private bool damp;
     private bool unDamp;
     private float val = 900;
@@ -28,6 +29,8 @@ public class SoundManeger : MonoBehaviour
     {
 
         val = 900;
+
+        a = Musik.GetComponent<AudioSource>();
 
         isMutet = intToBool(PlayerPrefs.GetInt("mute", 0));
 
@@ -42,7 +45,7 @@ public class SoundManeger : MonoBehaviour
             off.SetActive(false);
         }
 
-        Musik.SetActive(!isMutet);
+        a.mute = isMutet;
 
         SFXisMutet = intToBool(PlayerPrefs.GetInt("muteSFX", 0));
 
@@ -64,7 +67,7 @@ public class SoundManeger : MonoBehaviour
         if (damp && !unDamp)
         {
 
-            val -= 10000f * Time.deltaTime;
+            val -= 5000f * Time.unscaledDeltaTime;
             
             if (val <= 900)
             {
@@ -80,7 +83,7 @@ public class SoundManeger : MonoBehaviour
         if (unDamp && !damp)
         {
 
-            val += 10000f * Time.deltaTime;
+            val += 8000f * Time.unscaledDeltaTime;
             
             if (val >= 22000)
             {
@@ -113,12 +116,15 @@ public class SoundManeger : MonoBehaviour
     public void MusikOnOff()
     {
 
+        HitSFX("b");
+
         isMutet = !isMutet;
 
         if (isMutet)
         {
             off.SetActive(true);
             on.SetActive(false);
+
         }
         else
         {
@@ -128,15 +134,14 @@ public class SoundManeger : MonoBehaviour
 
         PlayerPrefs.SetInt("mute", boolToInt(isMutet));
 
-        Musik.SetActive(!isMutet);
+        a.mute = isMutet;
 
-        HitSFX("b");
-        
     }
 
     public void SFXOnOff()
     {
 
+        HitSFX("b");
         SFXisMutet = !SFXisMutet;
 
         if (SFXisMutet)
@@ -151,8 +156,6 @@ public class SoundManeger : MonoBehaviour
         }
 
         PlayerPrefs.SetInt("muteSFX", boolToInt(SFXisMutet));
-
-        HitSFX("b");
 
     }
 
@@ -176,9 +179,7 @@ public class SoundManeger : MonoBehaviour
             {
                 Instantiate(Bottun);
             }
-
         }
-        
     }
 
 

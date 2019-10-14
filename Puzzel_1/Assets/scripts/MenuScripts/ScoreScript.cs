@@ -187,10 +187,11 @@ public class ScoreScript : MonoBehaviour
     {
         if (!rewardedAdBottun.activeInHierarchy)
         {
+            FindObjectOfType<SoundManeger>().HitSFX("b");
             FindObjectOfType<BagGroundScript>().fadeBagground(false);
             PauseMenu.SetActive(true);
             Time.timeScale = 0;
-            FindObjectOfType<SoundManeger>().HitSFX("b");
+            FindObjectOfType<SoundManeger>().dampeSound();
         }
         else
         {
@@ -202,10 +203,11 @@ public class ScoreScript : MonoBehaviour
     public void unPauseGame()
     {
 
+        FindObjectOfType<SoundManeger>().HitSFX("b");
         FindObjectOfType<BagGroundScript>().fadeBagground(true);
         PauseMenu.SetActive(false);
         Time.timeScale = 1;
-        FindObjectOfType<SoundManeger>().HitSFX("b");
+        FindObjectOfType<SoundManeger>().unDampeSound();
 
     }
 
@@ -268,6 +270,8 @@ public class ScoreScript : MonoBehaviour
     public void BackToStartMenu()
     {
 
+        FindObjectOfType<SoundManeger>().HitSFX("b");
+
         SPuzzelPices = 0;
         PuzzelPices = 0;
         MissedPuzzelPices = 0;
@@ -277,27 +281,27 @@ public class ScoreScript : MonoBehaviour
         DeathUI.SetActive(false);
         FindObjectOfType<SettingsAnimScript>().settings(false);
         FindObjectOfType<shopAnimScript>().openShop(false);
-        FindObjectOfType<SoundManeger>().HitSFX("b");
+        
     }
 
     public void settings()
     {
 
+        FindObjectOfType<SoundManeger>().HitSFX("b");
         FindObjectOfType<SettingsAnimScript>().settings(true);
         FindObjectOfType<shopAnimScript>().openShop(false);
-        FindObjectOfType<SoundManeger>().HitSFX("b");
 
     }
 
     public void ShopBottun()
     {
 
+        FindObjectOfType<SoundManeger>().HitSFX("b");
         FindObjectOfType<Shop>().updateShop();
         updateText();
 
         FindObjectOfType<shopAnimScript>().openShop(true);
         FindObjectOfType<SettingsAnimScript>().settings(false);
-        FindObjectOfType<SoundManeger>().HitSFX("b");
 
     }
 

@@ -63,7 +63,6 @@ public class adScript : MonoBehaviour
 
                         Advertisement.Show(rewarded_video_ad, new ShowOptions() { resultCallback = HandleAdResult });
                         
-
                     }
 
                 }
@@ -113,10 +112,11 @@ public class adScript : MonoBehaviour
                 break;
 
             case ShowResult.Skipped:
-                FindObjectOfType<ScoreScript>().endGame();
+                FindObjectOfType<HealtBar>().fullHealth();
+                FindObjectOfType<ScoreScript>().continueGame();
                 playAd = false;
                 rewardedAd = false;
-                isAdPlayed = false;
+                isAdPlayed = true;
                 timer = 0f;
                 break;
 
