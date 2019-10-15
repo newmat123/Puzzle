@@ -7,18 +7,12 @@ public class adScript : MonoBehaviour
 {
 
     public bool isAdPlayed;
-    public bool rewardedAd;
     public bool playAd;
+    public bool rewardedAd;
 
-    float timer;
+    private float timer;
+    private int timesPlayed;
 
-    int timesPlayed;
-
-    private string store_id = "3312267";
-
-    private string video_ad = "video";
-    private string rewarded_video_ad = "rewardedVideo";
-    private string banner_ad = "bannerAd";
 
     void Start()
     {
@@ -27,53 +21,37 @@ public class adScript : MonoBehaviour
         rewardedAd = false;
         playAd = false;
 
-        Advertisement.Initialize(store_id);
         timesPlayed = 0;
         
     }
 
     private void Update()
     {
-
         if (rewardedAd)
         {
             if (isAdPlayed == false)
             {
-
-
                 if (playAd == false)
                 {
-
                     timer += Time.fixedDeltaTime;
                     if (timer >= 4f)
                     {
-
                         FindObjectOfType<ScoreScript>().endGame();
                         rewardedAd = false;
                         timer = 0f;
-
                     }
-
                 }
                 else
                 {
-
-                    if (Advertisement.IsReady(rewarded_video_ad))
-                    {
-
-                        Advertisement.Show(rewarded_video_ad, new ShowOptions() { resultCallback = HandleAdResult });
-                        
-                    }
-
+                    UnityADS.Instance.showRewardedAd(OnRewardedAdClosed);
                 }
             }
-            
         }
-
     }
 
     public void clkRewardedAd()
     {
+        timer = 0f;
         playAd = true;
     }
 
@@ -82,23 +60,17 @@ public class adScript : MonoBehaviour
         timesPlayed++;
         if(timesPlayed >= 3f)
         {
-
             timesPlayed = 0;
-
-            if (Advertisement.IsReady(video_ad))
-            {
-
-                Advertisement.Show(video_ad);
-
-            }
-
+            UnityADS.Instance.showRegularAd(onAdClosed);
         }
-
     }
 
-    private void HandleAdResult(ShowResult result)
+    private void onAdClosed(ShowResult result)
     {
 
+    }
+    private void OnRewardedAdClosed(ShowResult result)
+    {
         switch (result)
         {
 
@@ -108,28 +80,28 @@ public class adScript : MonoBehaviour
                 playAd = false;
                 rewardedAd = false;
                 isAdPlayed = true;
-                timer = 0f;
+                timesPlayed = 0;
+                timer = 0;
                 break;
 
             case ShowResult.Skipped:
-                FindObjectOfType<HealtBar>().fullHealth();
-                FindObjectOfType<ScoreScript>().continueGame();
+                FindObjectOfType<ScoreScript>().endGame();
                 playAd = false;
                 rewardedAd = false;
                 isAdPlayed = true;
-                timer = 0f;
+                timesPlayed = 0;
+                timer = 0;
                 break;
 
             case ShowResult.Failed:
                 FindObjectOfType<ScoreScript>().endGame();
                 playAd = false;
                 rewardedAd = false;
-                isAdPlayed = false;
-                timer = 0f;
+                isAdPlayed = true;
+                timesPlayed = 0;
+                timer = 0;
                 break;
 
         }
-
     }
-
 }
