@@ -43,7 +43,17 @@ public class adScript : MonoBehaviour
                 }
                 else
                 {
-                    UnityADS.Instance.showRewardedAd(OnRewardedAdClosed);
+                    if (Advertisement.IsReady("rewardedVideo"))
+                    {
+                        UnityADS.Instance.showRewardedAd(OnRewardedAdClosed);
+                    }
+                    else
+                    {
+                        FindObjectOfType<ScoreScript>().endGame();
+                        rewardedAd = false;
+                        playAd = false;
+                        timer = 0f;
+                    }
                 }
             }
         }
@@ -65,12 +75,14 @@ public class adScript : MonoBehaviour
         }
     }
 
+
     private void onAdClosed(ShowResult result)
     {
 
     }
     private void OnRewardedAdClosed(ShowResult result)
     {
+
         switch (result)
         {
 
@@ -85,7 +97,8 @@ public class adScript : MonoBehaviour
                 break;
 
             case ShowResult.Skipped:
-                FindObjectOfType<ScoreScript>().endGame();
+                FindObjectOfType<HealtBar>().fullHealth();
+                FindObjectOfType<ScoreScript>().continueGame();
                 playAd = false;
                 rewardedAd = false;
                 isAdPlayed = true;
@@ -94,7 +107,8 @@ public class adScript : MonoBehaviour
                 break;
 
             case ShowResult.Failed:
-                FindObjectOfType<ScoreScript>().endGame();
+                FindObjectOfType<HealtBar>().fullHealth();
+                FindObjectOfType<ScoreScript>().continueGame();
                 playAd = false;
                 rewardedAd = false;
                 isAdPlayed = true;
