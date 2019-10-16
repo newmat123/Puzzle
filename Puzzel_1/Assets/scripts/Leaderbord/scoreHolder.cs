@@ -11,19 +11,22 @@ public class scoreHolder : MonoBehaviour
     private Transform entryTemplate;
     private List<Transform> highscoreEntryTransformList;
 
+    private int maxAmountOfScores = 7;
+
     private void Awake()
     {
-
+        
         entryContainer = transform.Find("ScoreContainer");
         entryTemplate = entryContainer.Find("ScoreTemplet");
 
         entryTemplate.gameObject.SetActive(false);
 
+        
         string jsonString = PlayerPrefs.GetString("highscoreTable");
         Highscores highscores = JsonUtility.FromJson<Highscores>(jsonString);
 
         //sort entry list by score
-        for(int i = 0; i < highscores.highscoreEntryList.Count; i++)
+        for (int i = 0; i < highscores.highscoreEntryList.Count; i++)
         {
             for(int j = i + 1; j < highscores.highscoreEntryList.Count; j++)
             {
@@ -36,12 +39,19 @@ public class scoreHolder : MonoBehaviour
                 }
             }
         }
-
+        
+        while(highscores.highscoreEntryList.Count > maxAmountOfScores)
+        {
+            highscores.highscoreEntryList.RemoveAt(highscores.highscoreEntryList.Count - 1);
+        }
+            
+        
         highscoreEntryTransformList = new List<Transform>();
         foreach (HighscoreEntry highscoreEntry in highscores.highscoreEntryList)
         {
             CreateHighscoreEntryTransform(highscoreEntry, entryContainer, highscoreEntryTransformList);
         }
+        
     }
 
     private void CreateHighscoreEntryTransform(HighscoreEntry highscoreEntry, Transform container, List<Transform> transformList)
@@ -67,15 +77,16 @@ public class scoreHolder : MonoBehaviour
         entryTransform.Find("placeText").GetComponent<TextMeshProUGUI>().text = rankString;
 
         //------------------------------------------------
-        int score = highscoreEntry.score;
+        float score = highscoreEntry.score;
 
-        entryTransform.Find("timeText").GetComponent<TextMeshProUGUI>().text = score.ToString();
+        entryTransform.Find("timeText").GetComponent<TextMeshProUGUI>().text = score.ToString("F2");
 
         string name = highscoreEntry.name;
 
         entryTransform.Find("nameText").GetComponent<TextMeshProUGUI>().text = name;
 
         entryTransform.Find("ScoreBagground").gameObject.SetActive(rank % 2 == 1);
+
         if(rank == 1)
         {
             entryTransform.Find("nameText").GetComponent<TextMeshProUGUI>().color = Color.green;
@@ -105,7 +116,7 @@ public class scoreHolder : MonoBehaviour
 
 
 
-    private void AddHighscoreEntry(int score, string name)
+    public void AddHighscoreEntry(float score, string name)
     {
         //Create HighscoreEntry
         HighscoreEntry highscoreEntry = new HighscoreEntry { score = score, name = name };
@@ -121,11 +132,19 @@ public class scoreHolder : MonoBehaviour
         string json = JsonUtility.ToJson(highscores);
         PlayerPrefs.SetString("highscoreTable", json);
         PlayerPrefs.Save();
+
+        Awake();
+
     }
 
 
+    //test
+    public void rrr()
+    {
 
+        AddHighscoreEntry(0, "none");
 
+    }
 
 
     private class Highscores
@@ -137,7 +156,7 @@ public class scoreHolder : MonoBehaviour
     [System.Serializable]
     private class HighscoreEntry
     {
-        public int score;
+        public float score;
         public string name;
     }
 

@@ -100,6 +100,8 @@ public class ScoreScript : MonoBehaviour
 
                 newrecord.text = "New Record!!";
 
+                FindObjectOfType<scoreHolder>().AddHighscoreEntry(BestTime, PlayerPrefs.GetString("theName"));
+
             }
 
             record.text = timeCount.ToString("F2");
@@ -303,6 +305,15 @@ public class ScoreScript : MonoBehaviour
         FindObjectOfType<shopAnimScript>().openShop(true);
         FindObjectOfType<SettingsAnimScript>().settings(false);
 
+    }
+
+    public void LBopen()
+    {
+        FindObjectOfType<LeaderBoardScript>().openLB(true);
+    }
+    public void LBclose()
+    {
+        FindObjectOfType<LeaderBoardScript>().openLB(false);
     }
 
 }
