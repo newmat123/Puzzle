@@ -126,7 +126,9 @@ public class scoreHolder : MonoBehaviour
         Highscores highscores = JsonUtility.FromJson<Highscores>(jsonString);
 
         //adds new highscore
+        
         highscores.highscoreEntryList.Add(highscoreEntry);
+        
 
         //saves new list
         string json = JsonUtility.ToJson(highscores);

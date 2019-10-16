@@ -404,6 +404,11 @@ public class Shop : MonoBehaviour
             PlayerPrefs.SetInt("HealthPowerupBool" + i, boolToInt(HealthPoweupBuyed[i]));
         }
         updateShop();
+
+        float k = 0;
+        PlayerPrefs.SetFloat("savedRecord", k);
+        PlayerPrefs.Save();
+
     }
 
 
