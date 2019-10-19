@@ -27,6 +27,10 @@ public class playerMovement : MonoBehaviour
             }
                 
         }
+        if(Input.touchCount > 1)
+        {
+            FindObjectOfType<slowMotion>().DoSlowmotion();
+        }
 
     }
 
